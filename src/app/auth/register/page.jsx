@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { authClient } from "@/lib/auth-client";
+import { authClient, useSession } from "@/lib/auth-client";
 import {
   Form,
   TextField,
@@ -11,17 +11,18 @@ import {
   FieldError,
   Description,
   Button,
-  toast,
 } from "@heroui/react";
-
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
-
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const router = useRouter();
   const redirect = "/";
+  const { refetch } = useSession();
 
   // PASSWORD VALIDATION
   const validatePassword = (value) => {
@@ -50,9 +51,9 @@ const Register = () => {
     e.preventDefault();
 
     setError("");
+    setLoading(true);
 
     const formData = new FormData(e.currentTarget);
-
     const data = Object.fromEntries(formData.entries());
 
     try {
@@ -60,22 +61,24 @@ const Register = () => {
         name: data.name,
         email: data.email,
         password: data.password,
-        imageUrl:data.image,
-        role:data.role,
+        image: data.image,
+        role: data.role,
       });
-    
+
       if (result.error) {
         setError(result.error.message);
+        setLoading(false);
         return;
       }
 
       toast.success("Account created successfully!");
-
+      await refetch();
       setTimeout(() => {
         router.push(redirect);
-      }, 500);
+      }, 100);
     } catch (err) {
-      setError(err.message || "Something went wrong");
+      toast.error(err?.message || "Something went wrong");
+      setLoading(false);
     }
   };
 
@@ -85,10 +88,9 @@ const Register = () => {
 
   return (
     <div className="w-full max-w-md mx-auto rounded-3xl border border-default-200 bg-background py-5 px-10 shadow-lg my-10">
-
       {/* ERROR */}
       {error && (
-        <p className="text-red-500 text-sm mb-3 text-center">
+        <p className="text-red-500 text-sm mb-3 text-center bg-red-100 p-2 shadow rounded-2xl">
           {error}
         </p>
       )}
@@ -102,7 +104,6 @@ const Register = () => {
       </div>
 
       <Form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-
         {/* NAME */}
         <TextField isRequired name="name">
           <Label>Full Name</Label>
@@ -117,7 +118,7 @@ const Register = () => {
           <FieldError />
         </TextField>
 
-        {/* PASSWORD (FIXED) */}
+        {/* PASSWORD */}
         <TextField
           isRequired
           name="password"
@@ -136,11 +137,11 @@ const Register = () => {
         </TextField>
 
         {/* IMAGE */}
-        <TextField isRequired name="image">
+        <TextField name="image">
           <Label>Profile Image URL</Label>
           <Input
             type="url"
-            placeholder="https://your-image-link.com/photo.jpg"
+            placeholder="https://i.ibb.co.com/hx063rhL/IMG-20260530-130354.jpg"
           />
           <FieldError />
         </TextField>
@@ -151,20 +152,35 @@ const Register = () => {
 
           <div className="flex gap-4 text-sm">
             <label className="flex items-center gap-2">
-              <input type="radio" name="role" value="client" defaultChecked />
+              <input
+                type="radio"
+                name="role"
+                value="client"
+                defaultChecked
+              />
               Client
             </label>
 
             <label className="flex items-center gap-2">
-              <input type="radio" name="role" value="freelancer" />
+              <input
+                type="radio"
+                name="role"
+                value="freelancer"
+              />
               Freelancer
             </label>
           </div>
         </div>
 
         {/* SUBMIT */}
-        <Button color="primary" className="w-full font-semibold" type="submit">
-          Create Account
+        <Button
+          color="primary"
+          className="w-full font-semibold"
+          type="submit"
+          isLoading={loading}
+          isDisabled={loading}
+        >
+          {loading ? "Creating Account..." : "Create Account"}
         </Button>
 
         {/* GOOGLE */}

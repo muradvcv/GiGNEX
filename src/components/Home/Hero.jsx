@@ -72,7 +72,7 @@ export default function HeroSection() {
                   Platform Stats
                 </h3>
 
-                <Chip size="sm" color="success">
+                <Chip size="md" color="success">
                   Live
                 </Chip>
               </div>

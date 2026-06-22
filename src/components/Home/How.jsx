@@ -1,4 +1,4 @@
-import { ArrowRight, BadgeCheck, BriefcaseBusiness, DollarSign, FileText, MessageSquareText, UserRoundCheck, Users } from "lucide-react";
+import { ArrowRight,FileText, MessageSquareText, UserRoundCheck} from "lucide-react";
 
 export default function How() {
   const steps = [

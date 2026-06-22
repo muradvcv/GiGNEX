@@ -1,12 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@heroui/react";
-import { Menu, X } from "lucide-react";
+import { LayoutDashboard, LogOut, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { authClient, useSession } from "@/lib/auth-client";
 
 export default function NavBar() {
+  const { data: session, isPending } = useSession();
+  const user = session?.user;
+  
+
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
@@ -15,10 +21,21 @@ export default function NavBar() {
     { label: "Freelancers", href: "/freelancers" },
   ];
 
+  const handleLogout = async () => {
+    try {
+      await authClient.signOut();
+
+      // Force refresh + redirect
+      router.refresh();
+      window.location.href = "/";
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow">
       <div className="max-w-7xl mx-auto h-16 px-4 lg:px-6 flex items-center justify-between">
-
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
           <Image
@@ -48,21 +65,66 @@ export default function NavBar() {
           ))}
         </div>
 
-        {/* Desktop Buttons (FIXED + BEAUTIFUL) */}
+        {/* Desktop Auth */}
         <div className="hidden md:flex items-center gap-3">
-          <Link
-            href="/auth/login"
-            className="px-6 h-10 flex items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-700 font-medium hover:bg-gray-50 hover:border-gray-300 transition"
-          >
-            Login
-          </Link>
+          {isPending ? (
+            <div className="text-sm text-gray-500">Loading...</div>
+          ) : user ? (
+            <>
+                <div className="flex items-center gap-4">
+                  {/* Dashboard */}
+                  <Link
+                    href="/dashboard"
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 transition"
+                  >
+                    <LayoutDashboard size={18} />
+                    <span className="font-medium">Dashboard</span>
+                  </Link>
 
-          <Link
-            href="/auth/register"
-            className="px-6 h-10 flex items-center justify-center rounded-xl bg-[#0080ff] text-white font-medium shadow-sm hover:shadow-md hover:opacity-90 transition"
-          >
-            Register
-          </Link>
+                  {/* User Avatar */}
+                  <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-200">
+                    {user?.image ? (
+                      <Image
+                        src={user.image}
+                        alt={user?.name || "User"}
+                        width={40}
+                        height={40}
+                        className="w-full h-full object-cover"
+                      />
+                      
+                    ) : (
+                      <div className="w-full h-full bg-amber-100 text-amber-600 flex items-center justify-center font-semibold text-sm">
+                        {user?.name?.slice(0, 2).toUpperCase()}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Logout */}
+                  <button
+                    onClick={handleLogout}
+                    className="p-2 rounded-lg text-gray-500 hover:bg-red-50 hover:text-red-500 transition"
+                  >
+                    <LogOut size={18} />
+                  </button>
+                </div>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/auth/login"
+                className="px-6 h-10 flex items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-700 font-medium hover:bg-gray-50 hover:border-gray-300 transition"
+              >
+                Login
+              </Link>
+
+              <Link
+                href="/auth/register"
+                className="px-6 h-10 flex items-center justify-center rounded-xl bg-[#0080ff] text-white font-medium shadow-sm hover:shadow-md hover:opacity-90 transition"
+              >
+                Register
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Mobile Toggle */}
@@ -80,7 +142,6 @@ export default function NavBar() {
           }`}
       >
         <div className="px-4 py-5 bg-white">
-
           {/* Links */}
           <div className="flex flex-col gap-4">
             {navLinks.map((item) => (
@@ -95,25 +156,63 @@ export default function NavBar() {
             ))}
           </div>
 
-          {/* Mobile Buttons (FIXED + CLEAN) */}
+          {/* Mobile Auth */}
           <div className="flex flex-col gap-3 mt-6">
-            <Link
-              href="/auth/login"
-              className="w-full h-11 flex items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-700 font-medium hover:bg-gray-50 transition"
-              onClick={() => setIsOpen(false)}
-            >
-              Login
-            </Link>
+            {isPending ? (
+              <div className="text-center text-sm text-gray-500">
+                Loading...
+              </div>
+            ) : user ? (
+                <>
+                  <div className="flex items-center justify-between bg-gray-100 rounded-xl px-4 py-3">
 
-            <Link
-              href="/auth/register"
-              className="w-full h-11 flex items-center justify-center rounded-xl bg-[#0080ff] text-white font-medium shadow-sm hover:shadow-md hover:opacity-90 transition"
-              onClick={() => setIsOpen(false)}
-            >
-              Register
-            </Link>
+                    {/* Dashboard */}
+                    <Link
+                      href="/dashboard"
+                      onClick={() => setIsOpen(false)}
+                      className="flex items-center gap-2 text-gray-600 hover:text-black transition"
+                    >
+                      <LayoutDashboard size={18} />
+                      <span className="text-sm font-medium">Dashboard</span>
+                    </Link>
+
+                    {/* Avatar */}
+                    <div className="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-semibold text-sm">
+                      {user?.name?.slice(0, 2).toUpperCase()}
+                    </div>
+
+                    {/* Logout */}
+                    <button
+                      onClick={() => {
+                        setIsOpen(false);
+                        handleLogout();
+                      }}
+                      className="text-gray-500 hover:text-red-500 transition"
+                    >
+                      <LogOut size={18} />
+                    </button>
+                  </div>
+                </>
+            ) : (
+              <>
+                <Link
+                  href="/auth/login"
+                  className="w-full h-11 flex items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-700 font-medium hover:bg-gray-50 transition"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Login
+                </Link>
+
+                <Link
+                  href="/auth/register"
+                  className="w-full h-11 flex items-center justify-center rounded-xl bg-[#0080ff] text-white font-medium shadow-sm hover:shadow-md hover:opacity-90 transition"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Register
+                </Link>
+              </>
+            )}
           </div>
-
         </div>
       </div>
     </nav>
