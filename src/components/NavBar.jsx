@@ -1,0 +1,121 @@
+"use client";
+
+import { useState } from "react";
+import { Button } from "@heroui/react";
+import { Menu, X } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+
+export default function NavBar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const navLinks = [
+    { label: "Home", href: "/" },
+    { label: "Browse Tasks", href: "/tasks" },
+    { label: "Freelancers", href: "/freelancers" },
+  ];
+
+  return (
+    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow">
+      <div className="max-w-7xl mx-auto h-16 px-4 lg:px-6 flex items-center justify-between">
+
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-3">
+          <Image
+            src="/logoR.png"
+            alt="SkillSwap Logo"
+            width={36}
+            height={36}
+            priority
+          />
+
+          <span className="font-extrabold text-2xl tracking-tight">
+            <span className="text-[#0080ff]">Skill</span>
+            <span className="text-[#7700ff]">Swap</span>
+          </span>
+        </Link>
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-gray-600 hover:text-[#4B4CFE] transition-colors font-medium"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+
+        {/* Desktop Buttons (FIXED + BEAUTIFUL) */}
+        <div className="hidden md:flex items-center gap-3">
+          <Link
+            href="/auth/login"
+            className="px-6 h-10 flex items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-700 font-medium hover:bg-gray-50 hover:border-gray-300 transition"
+          >
+            Login
+          </Link>
+
+          <Link
+            href="/auth/register"
+            className="px-6 h-10 flex items-center justify-center rounded-xl bg-[#0080ff] text-white font-medium shadow-sm hover:shadow-md hover:opacity-90 transition"
+          >
+            Register
+          </Link>
+        </div>
+
+        {/* Mobile Toggle */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition"
+        >
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 ${isOpen ? "max-h-96 border-t" : "max-h-0"
+          }`}
+      >
+        <div className="px-4 py-5 bg-white">
+
+          {/* Links */}
+          <div className="flex flex-col gap-4">
+            {navLinks.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-gray-700 font-medium"
+                onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* Mobile Buttons (FIXED + CLEAN) */}
+          <div className="flex flex-col gap-3 mt-6">
+            <Link
+              href="/auth/login"
+              className="w-full h-11 flex items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-700 font-medium hover:bg-gray-50 transition"
+              onClick={() => setIsOpen(false)}
+            >
+              Login
+            </Link>
+
+            <Link
+              href="/auth/register"
+              className="w-full h-11 flex items-center justify-center rounded-xl bg-[#0080ff] text-white font-medium shadow-sm hover:shadow-md hover:opacity-90 transition"
+              onClick={() => setIsOpen(false)}
+            >
+              Register
+            </Link>
+          </div>
+
+        </div>
+      </div>
+    </nav>
+  );
+}
