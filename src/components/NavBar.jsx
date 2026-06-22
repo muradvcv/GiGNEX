@@ -10,7 +10,7 @@ import { authClient, useSession } from "@/lib/auth-client";
 export default function NavBar() {
   const { data: session, isPending } = useSession();
   const user = session?.user;
-  
+
 
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -68,45 +68,54 @@ export default function NavBar() {
         {/* Desktop Auth */}
         <div className="hidden md:flex items-center gap-3">
           {isPending ? (
-            <div className="text-sm text-gray-500">Loading...</div>
+            <div className="flex items-center justify-between w-full px-4">
+              {/* Dashboard */}
+              <div className="h-5 w-24 mr-5 bg-gray-200 animate-pulse rounded"></div>
+
+              {/* Profile + Logout */}
+              <div className="flex items-center gap-4">
+                <div className="h-10 w-10 bg-gray-200 animate-pulse rounded-full"></div>
+                <div className="h-5 w-5 bg-gray-200 animate-pulse rounded"></div>
+              </div>
+            </div>
           ) : user ? (
             <>
-                <div className="flex items-center gap-4">
-                  {/* Dashboard */}
-                  <Link
-                    href="/dashboard"
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 transition"
-                  >
-                    <LayoutDashboard size={18} />
-                    <span className="font-medium">Dashboard</span>
-                  </Link>
+              <div className="flex items-center gap-4">
+                {/* Dashboard */}
+                <Link
+                  href="/dashboard/client"
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 transition"
+                >
+                  <LayoutDashboard size={18} />
+                  <span className="font-medium">Dashboard</span>
+                </Link>
 
-                  {/* User Avatar */}
-                  <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-200">
-                    {user?.image ? (
-                      <Image
-                        src={user.image}
-                        alt={user?.name || "User"}
-                        width={40}
-                        height={40}
-                        className="w-full h-full object-cover"
-                      />
-                      
-                    ) : (
-                      <div className="w-full h-full bg-amber-100 text-amber-600 flex items-center justify-center font-semibold text-sm">
-                        {user?.name?.slice(0, 2).toUpperCase()}
-                      </div>
-                    )}
-                  </div>
+                {/* User Avatar */}
+                <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-200">
+                  {user?.image ? (
+                    <Image
+                      src={user.image}
+                      alt={user?.name || "User"}
+                      width={40}
+                      height={40}
+                      className="w-full h-full object-cover"
+                    />
 
-                  {/* Logout */}
-                  <button
-                    onClick={handleLogout}
-                    className="p-2 rounded-lg text-gray-500 hover:bg-red-50 hover:text-red-500 transition"
-                  >
-                    <LogOut size={18} />
-                  </button>
+                  ) : (
+                    <div className="w-full h-full bg-amber-100 text-amber-600 flex items-center justify-center font-semibold text-sm">
+                      {user?.name?.slice(0, 2).toUpperCase()}
+                    </div>
+                  )}
                 </div>
+
+                {/* Logout */}
+                <button
+                  onClick={handleLogout}
+                  className="p-2 rounded-lg text-gray-500 hover:bg-red-50 hover:text-red-500 transition"
+                >
+                  <LogOut size={18} />
+                </button>
+              </div>
             </>
           ) : (
             <>
@@ -163,36 +172,49 @@ export default function NavBar() {
                 Loading...
               </div>
             ) : user ? (
-                <>
-                  <div className="flex items-center justify-between bg-gray-100 rounded-xl px-4 py-3">
+              <>
+                <div className="flex items-center justify-between bg-gray-100 rounded-xl px-4 py-3">
 
-                    {/* Dashboard */}
-                    <Link
-                      href="/dashboard"
-                      onClick={() => setIsOpen(false)}
-                      className="flex items-center gap-2 text-gray-600 hover:text-black transition"
-                    >
-                      <LayoutDashboard size={18} />
-                      <span className="text-sm font-medium">Dashboard</span>
-                    </Link>
+                  {/* Dashboard */}
+                  <Link
+                    href="/dashboard"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-2 text-gray-600 hover:text-black transition"
+                  >
+                    <LayoutDashboard size={18} />
+                    <span className="text-sm font-medium">Dashboard</span>
+                  </Link>
 
-                    {/* Avatar */}
-                    <div className="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-semibold text-sm">
-                      {user?.name?.slice(0, 2).toUpperCase()}
+                  {/* Avatar */}
+                    <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-200">
+                      {user?.image ? (
+                        <Image
+                          src={user.image}
+                          alt={user?.name || "User"}
+                          width={40}
+                          height={40}
+                          className="w-full h-full object-cover shadow"
+                        />
+
+                      ) : (
+                        <div className="w-full h-full bg-amber-100 text-amber-600 flex items-center justify-center font-semibold text-sm">
+                          {user?.name?.slice(0, 2).toUpperCase()}
+                        </div>
+                      )}
                     </div>
 
-                    {/* Logout */}
-                    <button
-                      onClick={() => {
-                        setIsOpen(false);
-                        handleLogout();
-                      }}
-                      className="text-gray-500 hover:text-red-500 transition"
-                    >
-                      <LogOut size={18} />
-                    </button>
-                  </div>
-                </>
+                  {/* Logout */}
+                  <button
+                    onClick={() => {
+                      setIsOpen(false);
+                      handleLogout();
+                    }}
+                    className="text-gray-500 hover:text-red-500 transition"
+                  >
+                    <LogOut size={18} />
+                  </button>
+                </div>
+              </>
             ) : (
               <>
                 <Link
