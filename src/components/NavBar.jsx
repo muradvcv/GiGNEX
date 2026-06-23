@@ -4,16 +4,22 @@ import { useState } from "react";
 import { LayoutDashboard, LogOut, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { authClient, useSession } from "@/lib/auth-client";
 
 export default function NavBar() {
   const { data: session, isPending } = useSession();
   const user = session?.user;
-
-
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+
+
+  // dashboard er jonno nav hide
+  const pathname = usePathname();
+
+  if (pathname?.startsWith("/dashboard")) {
+    return null;
+  }
 
   const navLinks = [
     { label: "Home", href: "/" },
@@ -47,7 +53,7 @@ export default function NavBar() {
           />
 
           <span className="font-extrabold text-2xl tracking-tight">
-            <span className="text-[#0080ff]">Skill</span>
+            <span className="text-[#06B6D4]">Skill</span>
             <span className="text-[#7700ff]">Swap</span>
           </span>
         </Link>
@@ -83,7 +89,7 @@ export default function NavBar() {
               <div className="flex items-center gap-4">
                 {/* Dashboard */}
                 <Link
-                  href="/dashboard/client"
+                  href={`/dashboard/${user.role}`}
                   className="flex items-center gap-2 px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 transition"
                 >
                   <LayoutDashboard size={18} />
@@ -111,7 +117,7 @@ export default function NavBar() {
                 {/* Logout */}
                 <button
                   onClick={handleLogout}
-                  className="p-2 rounded-lg text-gray-500 hover:bg-red-50 hover:text-red-500 transition"
+                  className="p-2 rounded-lg  bg-red-50 text-red-800 transition hover:bg-red-200 cursor-pointer"
                 >
                   <LogOut size={18} />
                 </button>
@@ -128,7 +134,7 @@ export default function NavBar() {
 
               <Link
                 href="/auth/register"
-                className="px-6 h-10 flex items-center justify-center rounded-xl bg-[#0080ff] text-white font-medium shadow-sm hover:shadow-md hover:opacity-90 transition"
+                    className="px-6 h-10 flex items-center justify-center rounded-xl bg-[#06B6D4] text-white font-medium shadow-sm hover:shadow-md hover:opacity-90 transition"
               >
                 Register
               </Link>
@@ -177,7 +183,7 @@ export default function NavBar() {
 
                   {/* Dashboard */}
                   <Link
-                    href="/dashboard"
+                    href="/dashboard/client"
                     onClick={() => setIsOpen(false)}
                     className="flex items-center gap-2 text-gray-600 hover:text-black transition"
                   >

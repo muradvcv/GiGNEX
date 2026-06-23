@@ -58,9 +58,10 @@ const Login = () => {
   };
 
   const handleGoogleLogin = async () => {
-    console.log("Google Login");
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
   };
-
   return (
     <div className="w-full max-w-md mx-auto rounded-3xl border border-default-200 bg-background py-5 px-10 shadow-lg my-10">
 
@@ -104,7 +105,7 @@ const Login = () => {
         </TextField>
 
         {/* SUBMIT */}
-        <Button color="primary" className="w-full font-semibold" type="submit">
+        <Button color="primary" className="w-full font-semibold bg-[#06B6D4]" type="submit">
           Create Account
         </Button>
 

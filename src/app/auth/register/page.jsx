@@ -15,6 +15,7 @@ import {
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 const Register = () => {
   const [error, setError] = useState("");
@@ -23,7 +24,7 @@ const Register = () => {
   const router = useRouter();
   const redirect = "/";
   const { refetch } = useSession();
-
+  const [selectedRole, setSelectedRole] = useState("client");
   // PASSWORD VALIDATION
   const validatePassword = (value) => {
     if (!value) return "Password is required";
@@ -63,6 +64,20 @@ const Register = () => {
         password: data.password,
         image: data.image,
         role: data.role,
+        skills:
+          data.role === "freelancer"
+            ? data.skills?.split(",").map((s) => s.trim())
+            : [],
+
+        bio:
+          data.role === "freelancer"
+            ? data.bio
+            : "",
+
+        hourlyRate:
+          data.role === "freelancer"
+            ? Number(data.hourlyRate || 0)
+            : 0,
       });
 
       if (result.error) {
@@ -83,7 +98,9 @@ const Register = () => {
   };
 
   const handleGoogleLogin = async () => {
-    console.log("Google Login");
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
   };
 
   return (
@@ -98,9 +115,10 @@ const Register = () => {
       {/* HEADER */}
       <div className="mb-8 text-center">
         <h1 className="text-3xl font-bold">Create Account</h1>
-        <p className="mt-2 text-default-500">
+        <p className=" text-default-500">
           Join our platform today
         </p>
+
       </div>
 
       <Form className="flex flex-col gap-5" onSubmit={handleSubmit}>
@@ -150,32 +168,58 @@ const Register = () => {
         <div className="flex flex-col gap-2">
           <Label>Account Type</Label>
 
-          <div className="flex gap-4 text-sm">
-            <label className="flex items-center gap-2">
+          <div className="flex gap-4 text-sm p-2 ">
+            <label className="flex items-center gap-2 px-2 py-1 rounded-xl shadow">
               <input
                 type="radio"
                 name="role"
                 value="client"
-                defaultChecked
+                checked={selectedRole === "client"}
+                onChange={(e) => setSelectedRole(e.target.value)}
               />
               Client
             </label>
 
-            <label className="flex items-center gap-2">
+            <label className="flex items-center gap-2 px-2 py-1 rounded-xl shadow">
               <input
                 type="radio"
                 name="role"
                 value="freelancer"
+                checked={selectedRole === "freelancer"}
+                onChange={(e) => setSelectedRole(e.target.value)}
               />
               Freelancer
             </label>
           </div>
         </div>
+        {/* FREELANCER PROFILE */}
+        {selectedRole === "freelancer" && (
+          <div className="border border-emerald-200 rounded-2xl p-5 bg-emerald-50/40 space-y-4">
+            <h3 className="font-semibold text-emerald-600">
+              Freelancer Profile
+            </h3>
+
+            <TextField name="skills">
+              <Label>Skills (comma-separated)</Label>
+              <Input placeholder="React, Node.js, Design" />
+            </TextField>
+
+            <TextField name="bio">
+              <Label>Bio</Label>
+              <Input placeholder="Tell clients about yourself..." />
+            </TextField>
+
+            <TextField name="hourlyRate" type="number">
+              <Label>Hourly Rate (USD)</Label>
+              <Input placeholder="50" />
+            </TextField>
+          </div>
+        )}
 
         {/* SUBMIT */}
         <Button
           color="primary"
-          className="w-full font-semibold"
+          className="w-full font-semibold bg-[#06B6D4]"
           type="submit"
           isLoading={loading}
           isDisabled={loading}

@@ -10,9 +10,17 @@ import {
   FaEnvelope
 } from "react-icons/fa";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+
+    // dashboard er jonno nav hide
+    const pathname = usePathname();
+  
+    if (pathname?.startsWith("/dashboard")) {
+      return null;
+    }
 
   return (
     <footer className="w-full bg-slate-50 border-t border-slate-200 text-slate-600 py-12 px-6 md:px-12">
@@ -38,7 +46,7 @@ export default function Footer() {
                 />
                 <span className="font-extrabold text-2xl tracking-tight">
 
-                  <span className="text-[#0080ff]">Skill</span>
+                  <span className="text-[#06B6D4]">Skill</span>
 
 
                   <span className="text-[#7700ff]">Swap</span>
