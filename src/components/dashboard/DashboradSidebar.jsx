@@ -12,7 +12,7 @@ import { useSession } from "@/lib/auth-client";
 export default function DashboradSidebar() {
   const { data: session } = useSession();
   const user=session?.user;
-  // console.log(user,'userssssssssssss');
+ 
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -20,8 +20,8 @@ export default function DashboradSidebar() {
     client: [
       { icon: House, label: "Home", href: "/" },
       { icon: LayoutHeaderCells, label: "Overview", href: "/dashboard/client" },
-      { icon: ListCheck, label: "My Tasks", href: "/dashboard/notifications" },
-      { icon: CirclePlus, label: "Post Task", href: "/dashboard/messages" },
+      { icon: ListCheck, label: "My Tasks", href: "/dashboard/client/task" },
+      { icon: CirclePlus, label: "Post Task", href: "/dashboard/client/task/new" },
       { icon: Archive, label: "Proposals", href: "/dashboard/profile" },
       { icon: CircleDollar, label: "Payments", href: "/dashboard/settings" },
     ],
@@ -34,10 +34,10 @@ export default function DashboradSidebar() {
       { icon: Person, label: "Edit Profile", href: "/dashboard/profile" },
     ],
     admin: [
-      { icon: LayoutHeaderCells, label: "Overview", href: "/dashboard" },
-      { icon: Magnifier, label: "Browse Tasks", href: "/dashboard/tasks" },
-      { icon: ListCheck, label: "My Proposals", href: "/dashboard/proposals" },
-      { icon: Folder, label: "Active Projects", href: "/dashboard/projects" },
+      { icon: CirclePlus, label: "Overview", href: "/dashboard/moessages" },
+      { icon: CirclePlus, label: "User", href: "/dashboard/moessages" },
+      { icon: Archive, label: "Tasks", href: "/dashboard/proofile" },
+      { icon: CircleDollar, label: "Payments", href: "/dashboard/setotings" },
     ]
   }
 
@@ -81,7 +81,7 @@ export default function DashboradSidebar() {
               href={item.href}
               className={`group flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition-all
               ${isActive
-                  ? "bg-[#f5e3f8] text-[#0b8cf5] shadow-md"
+                  ? "bg-[#f5e9f5a3] text-[#0b8cf5] shadow-md"
                   : "text-gray-500 hover:text-black hover:bg-gray-50"
                 }`}
             >

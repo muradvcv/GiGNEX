@@ -15,7 +15,6 @@ import {
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
-import Image from "next/image";
 
 const Register = () => {
   const [error, setError] = useState("");

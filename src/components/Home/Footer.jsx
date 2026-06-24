@@ -7,10 +7,12 @@ import {
   FaTwitter,
   FaLinkedin,
   FaFacebookF,
-  FaEnvelope
+  FaEnvelope,
+  FaLinkedinIn
 } from "react-icons/fa";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -115,19 +117,31 @@ export default function Footer() {
 
           {/* Social Icons */}
           <div className="flex items-center gap-2">
-            <a className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-900 text-white hover:bg-blue-600 transition">
-              <FaTwitter size={14} />
+            <a
+              href="#"
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-[#06B6D4] text-white hover:bg-[#7700ff] transition-all duration-300"
+            >
+              <FaXTwitter size={14} />
             </a>
 
-            <a className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-900 text-white hover:bg-blue-600 transition">
+            <a
+              href="#"
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-[#06B6D4] text-white hover:bg-[#7700ff] transition-all duration-300"
+            >
               <FaFacebookF size={14} />
             </a>
 
-            <a className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-900 text-white hover:bg-blue-600 transition">
-              <FaLinkedin size={14} />
+            <a
+              href="#"
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-[#06B6D4] text-white hover:bg-[#7700ff] transition-all duration-300"
+            >
+              <FaLinkedinIn size={14} />
             </a>
 
-            <a className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-900 text-white hover:bg-blue-600 transition">
+            <a
+              href="#"
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-[#06B6D4] text-white hover:bg-[#7700ff] transition-all duration-300"
+            >
               <FaInstagram size={14} />
             </a>
           </div>
