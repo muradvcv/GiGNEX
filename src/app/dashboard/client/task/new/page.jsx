@@ -10,20 +10,46 @@ import {
   ListBox,
   Label,
 } from "@heroui/react";
+import { useSession } from "@/lib/auth-client";
+import { CreateTask } from "@/lib/actions/task";
+import { useRouter } from "next/navigation";
 
 export default function PostTask() {
-  const onSubmit = (e) => {
+  const { data: session } = useSession();
+  const router = useRouter();
+  const user = session?.user;
+  const onSubmit = async(e) => {
     e.preventDefault();
 
     const data = Object.fromEntries(new FormData(e.currentTarget).entries());
-    console.log(data);
+    const payload = {
+      title: data.title,
+      category: data.category,
+      description: data.description,
+      budget: Number(data.budget),
+      deadline: data.deadline,
 
-    // API call here
-    // await fetch("/api/tasks", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(data),
-    // });
+      clientName: user?.name,
+      clientEmail: user?.email,
+      clientPhoto: user?.image,
+      clientId:user?.id,
+
+      status: "open",
+
+      proposalsCount: 0,
+      assignedFreelancerId: null,
+
+     
+    };
+
+    // console.log(payload,'palyloooooooooo',user,'userrr');
+    
+    const res=await CreateTask(payload)
+    setTimeout(() => {
+      router.push("/dashboard/client/task");
+    }, 100);
+
+
   };
 
   return (
@@ -39,7 +65,7 @@ export default function PostTask() {
           </div>
 
           <div>
-            <Select name="jobCategory" required className="w-full py-1" placeholder="Select category">
+            <Select name="category" required className="w-full py-1" placeholder="Select category">
               <Label>Task Category</Label>
 
               <Select.Trigger>
