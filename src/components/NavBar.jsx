@@ -23,8 +23,8 @@ export default function NavBar() {
 
   const navLinks = [
     { label: "Home", href: "/" },
-    { label: "Browse Tasks", href: "/tasks" },
-    { label: "Freelancers", href: "/freelancers" },
+    { label: "Browse Tasks", href: "/public/browsetasks" },
+    { label: "Freelancers", href: "/public/freelancers" },
   ];
 
   const handleLogout = async () => {
