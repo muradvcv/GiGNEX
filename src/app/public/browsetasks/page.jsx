@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CalendarDays, CircleDollarSign, Briefcase } from "lucide-react";
+import { CalendarDays, CircleDollarSign, Briefcase, ArrowRight } from "lucide-react";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -22,7 +22,7 @@ const formatDate = (date) => {
   return isNaN(d.getTime()) ? "Not Set" : d.toLocaleDateString("en-GB");
 };
 
-// SkillSwap ব্র্যান্ডের সাথে ম্যাচিং ক্যাটাগরি স্টাইল
+
 const getCategoryStyle = (category) => {
   const styles = {
     "Web Development": "bg-blue-50 text-blue-600 border border-blue-100",
@@ -72,46 +72,81 @@ const BrowseTasks = async () => {
         {tasks?.map((task) => (
           <Link
             key={task._id}
-            href={`/browse-tasks/${task._id}`}
-            className="group block"
+            href={`/public/browsetasks/${task._id}`}
+            className="group"
           >
-            <div className="flex flex-col h-full border border-gray-200/80 rounded-2xl p-6 bg-white shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 ease-in-out">
+            <div className="relative overflow-hidden h-full rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
 
-              {/* Status + Category Tags */}
-              <div className="flex flex-wrap items-center gap-2 mb-4">
-                <span className={`text-[11px] font-medium uppercase tracking-wider px-2.5 py-0.5 rounded-full ${statusStyles[task.status] || statusStyles.open}`}>
+              {/* Gradient Top Bar */}
+              <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-cyan-200 via-fuchsia-200" />
+
+              {/* Status + Category */}
+              <div className="flex flex-wrap gap-2 mb-5">
+                <span
+                  className={`px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider ${statusStyles[task.status] || statusStyles.open
+                    }`}
+                >
                   {task.status}
                 </span>
-                <span className={`text-[11px] font-medium px-2.5 py-0.5 rounded-full ${getCategoryStyle(task.category)}`}>
+
+                <span
+                  className={`px-3 py-1 rounded-full text-[11px] font-medium ${getCategoryStyle(task.category)
+                    }`}
+                >
                   {task.category}
                 </span>
               </div>
 
-              {/* Title & Description */}
+              {/* Content */}
               <div className="flex-1">
-                <h2 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-purple-600 transition-colors duration-200">
+                <h2 className="text-xl font-bold text-gray-900 line-clamp-2 group-hover:text-violet-600 transition-colors">
                   {task.title}
                 </h2>
-                <p className="text-sm text-gray-500 line-clamp-3 leading-relaxed mb-6">
+
+                <p className="mt-3 text-sm text-gray-500 leading-relaxed line-clamp-3">
                   {task.description}
                 </p>
               </div>
 
-              {/* Footer Meta Info */}
-              <div className="flex items-center justify-between pt-4 border-t border-gray-100 mt-auto">
+              {/* Footer */}
+              <div className="mt-6 pt-5 border-t border-gray-100 flex items-center justify-between">
+
                 {/* Budget */}
-                <div className="flex items-center gap-1.5 text-gray-900 font-semibold text-sm">
-                  <CircleDollarSign size={16} className="text-emerald-500" />
-                  <span>${task.budget}</span>
+                <div className="flex items-center gap-2">
+                  <div className="p-2 rounded-xl bg-emerald-50">
+                    <CircleDollarSign
+                      size={18}
+                      className="text-emerald-600"
+                    />
+                  </div>
+
+                  <div>
+                    <p className="text-xs text-gray-400">
+                      Budget
+                    </p>
+                    <p className="font-bold text-emerald-600">
+                      ${task.budget}
+                    </p>
+                  </div>
                 </div>
 
                 {/* Deadline */}
-                <div className="flex items-center gap-1.5 text-gray-400 text-xs">
-                  <CalendarDays size={14} />
-                  <span>{formatDate(task.deadline)}</span>
-                </div>
-              </div>
+                <div className="text-right">
+                  <div className="flex items-center justify-end gap-1 text-gray-400 text-xs">
+                    <CalendarDays size={14} />
+                    <span>Post Date : {formatDate(task.deadline)}</span>
+                  </div>
 
+                  <div className="flex items-center justify-end gap-1 mt-2 text-violet-600 font-medium text-sm opacity-0 group-hover:opacity-100 transition-all">
+                    View
+                    <ArrowRight
+                      size={15}
+                      className="group-hover:translate-x-1 transition-transform"
+                    />
+                  </div>
+                </div>
+
+              </div>
             </div>
           </Link>
         ))}

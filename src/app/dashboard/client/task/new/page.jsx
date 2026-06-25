@@ -33,6 +33,7 @@ export default function PostTask() {
       clientEmail: user?.email,
       clientPhoto: user?.image,
       clientId:user?.id,
+      role:user?.role,
 
       status: "open",
 

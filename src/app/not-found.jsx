@@ -1,54 +1,62 @@
 "use client";
 
 import Link from "next/link";
-import { SearchX, ArrowLeft, Home } from "lucide-react";
+import { AlertCircle, Home, ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-cyan-50 via-white to-blue-50 ">
-      <div className="max-w-xl w-full text-center">
+    <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="max-w-md w-full px-6">
         {/* Icon */}
-        <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full bg-cyan-100 shadow-lg">
-          <SearchX size={56} className="text-cyan-600" />
+        <div className="flex justify-center mb-6">
+          <AlertCircle size={48} className="text-gray-400" strokeWidth={1.5} />
         </div>
 
-        {/* 404 */}
-        <h1 className="mt-8 text-4xl md:text-6xl font-black bg-gradient-to-r from-cyan-500 to-blue-800 bg-clip-text text-transparent">
-          404
-        </h1>
+        {/* Error Code */}
+        <div className="text-center mb-4">
+          <p className="text-sm font-medium text-gray-500 tracking-wide mb-2">
+            ERROR
+          </p>
+          <h1 className="text-5xl font-light text-gray-900">404</h1>
+        </div>
 
-        <h2 className="mt-3 text-2xl md:text-3xl font-bold text-gray-900">
-          Oops! Page Not Found
+        {/* Heading */}
+        <h2 className="text-xl font-semibold text-gray-900 text-center mb-3">
+          Page Not Found
         </h2>
 
-        <p className="mt-4 text-gray-500 text-lg leading-relaxed">
-          The page youre looking for doesnt exist, has been removed,
-          or is temporarily unavailable.
+        {/* Description */}
+        <p className="text-gray-600 text-center text-sm leading-relaxed mb-8">
+          The page you are looking for does not exist or has been moved. Let
+          get you back on track.
         </p>
 
         {/* Actions */}
-        <div className="mt-5 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="space-y-3 mb-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-2xl bg-cyan-500 px-6 py-3 text-white font-semibold shadow-md hover:bg-cyan-600 transition-all duration-300"
+            className="flex items-center justify-center gap-2 w-full rounded-lg bg-gray-900 px-4 py-2.5 text-white text-sm font-medium hover:bg-gray-800 transition-colors duration-200"
           >
-            <Home size={18} />
-            Back to Home
+            <Home size={16} />
+            Return to Home
           </Link>
 
           <button
             onClick={() => window.history.back()}
-            className="inline-flex items-center gap-2 rounded-2xl border border-gray-200 bg-white px-6 py-3 font-semibold text-gray-700 shadow-sm hover:bg-gray-50 transition-all duration-300"
+            className="flex items-center justify-center gap-2 w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 text-sm font-medium hover:bg-gray-50 transition-colors duration-200"
           >
-            <ArrowLeft size={18} />
+            <ArrowLeft size={16} />
             Go Back
           </button>
         </div>
 
-        {/* Bottom Text */}
-        <div className="mt-8 text-sm text-gray-400">
-          SkillSwap • Freelance Micro-Task Platform
-        </div>
+        {/* Divider */}
+        <div className="h-px bg-gray-200 mb-6"></div>
+
+        {/* Footer */}
+        <p className="text-xs text-gray-400 text-center">
+          SkillSwap Freelance Platform
+        </p>
       </div>
     </div>
   );

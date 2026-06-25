@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import {
   ListCheck,
@@ -143,14 +144,11 @@ export default async function Overview() {
               <p className="mt-2 text-default-500">
                 Post your first task to find talented freelancers
               </p>
-
-              <Button
-                as={Link}
-                href="/dashboard/client/task/new"
-                className="mt-6 bg-cyan-500 text-white"
-              >
-                Post a Task
-              </Button>
+              <Link href="/dashboard/client/task/new">
+                <Button className="mt-6 bg-cyan-500 text-white">
+                  Post a Task
+                </Button>
+              </Link>
             </div>
           </Card>
         ) : (
