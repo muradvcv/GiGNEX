@@ -27,11 +27,11 @@ export default function DashboradSidebar() {
     ],
     freelancer: [
       { icon: LayoutHeaderCells, label: "Overview", href: "/dashboard/freelancer" },
-      { icon: Magnifier, label: "Browse Tasks", href: "/dashboard/tasks" },
+      { icon: Magnifier, label: "Browse Tasks", href: "/public/browsetasks" },
       { icon: ListCheck, label: "My Proposals", href: "/dashboard/proposals" },
       { icon: Folder, label: "Active Projects", href: "/dashboard/projects" },
       { icon: CircleDollar, label: "Earnings", href: "/dashboard/earnings" },
-      { icon: Person, label: "Edit Profile", href: "/dashboard/profile" },
+      { icon: Person, label: "Edit Profile", href: "/public/freelancers/editprofile" },
     ],
     admin: [
       { icon: CirclePlus, label: "Overview", href: "/dashboard/moessages" },

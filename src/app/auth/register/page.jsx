@@ -63,6 +63,7 @@ const Register = () => {
         password: data.password,
         image: data.image,
         role: data.role,
+        isBlocked: false,
         skills:
           data.role === "freelancer"
             ? data.skills?.split(",").map((s) => s.trim())
