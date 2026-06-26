@@ -45,8 +45,9 @@ const BrowseTasks = async ({ searchParams }) => {
   const params = await searchParams;
 
   const page = Number(params?.page) || 1;
+  const search = params?.search || "";
 
-  const data = await getBrowseTasks(page);
+  const data = await getBrowseTasks(page, search);
 
   const tasks = data?.tasks || [];
   const totalPages = data?.totalPages || 1;
@@ -181,11 +182,7 @@ const BrowseTasks = async ({ searchParams }) => {
 
             {/* Previous */}
             <Link
-              href={`/public/browsetasks?page=${page - 1}`}
-              className={`px-4 py-2 rounded-lg border transition ${page <= 1
-                  ? "pointer-events-none opacity-50 bg-gray-100"
-                  : "bg-white hover:bg-cyan-50 hover:border-cyan-500"
-                }`}
+              href={`/public/browsetasks?page=${page - 1}&search=${search}`}
             >
               ← Previous
             </Link>
@@ -197,11 +194,7 @@ const BrowseTasks = async ({ searchParams }) => {
               return (
                 <Link
                   key={pageNumber}
-                  href={`/public/browsetasks?page=${pageNumber}`}
-                  className={`w-10 h-10 flex items-center justify-center rounded-lg border transition ${page === pageNumber
-                      ? "bg-cyan-600 text-white border-cyan-600"
-                      : "bg-white hover:bg-cyan-50 hover:border-cyan-500"
-                    }`}
+                  href={`/public/browsetasks?page=${pageNumber}&search=${search}`}
                 >
                   {pageNumber}
                 </Link>
@@ -210,11 +203,7 @@ const BrowseTasks = async ({ searchParams }) => {
 
             {/* Next */}
             <Link
-              href={`/public/browsetasks?page=${page + 1}`}
-              className={`px-4 py-2 rounded-lg border transition ${page >= totalPages
-                  ? "pointer-events-none opacity-50 bg-gray-100"
-                  : "bg-white hover:bg-cyan-50 hover:border-cyan-500"
-                }`}
+              href={`/public/browsetasks?page=${page + 1}&search=${search}`}
             >
               Next →
             </Link>

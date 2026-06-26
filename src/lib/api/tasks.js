@@ -19,9 +19,13 @@ export const getTaskById = async (id) => {
 
 
 // Get all tasks
-export async function getBrowseTasks(page = 1, limit = 6) {
+export async function getBrowseTasks(
+  page = 1,
+  search = "",
+  limit = 6
+) {
   const res = await fetch(
-    `${baseUrl}/api/browsetasks?page=${page}&limit=${limit}`,
+    `${baseUrl}/api/browsetasks?page=${page}&limit=${limit}&search=${encodeURIComponent(search)}`,
     {
       cache: "no-store",
     }
@@ -33,7 +37,6 @@ export async function getBrowseTasks(page = 1, limit = 6) {
 
   return res.json();
 }
-
 // Get single task
 export async function getBrowseTaskDetails(id) {
   try {
