@@ -10,23 +10,7 @@ import {
 } from "lucide-react";
 import { getUserForServer } from "@/lib/user/getuser";
 import Image from "next/image";
-
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
-const getTasksDetails = async (id) => {
-  const res = await fetch(
-    `${baseUrl}/api/browsetasks/${id}`,
-    {
-      cache: "no-store",
-    }
-  );
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch task details");
-  }
-
-  return res.json();
-};
+import { getBrowseTaskDetails } from "@/lib/api/tasks";
 
 const TasksDetails = async ({ params }) => {
   const { id } = await params;
@@ -34,7 +18,18 @@ const TasksDetails = async ({ params }) => {
   const session = await getUserForServer();
   const userRole = session?.user?.role;
 
-  const data = await getTasksDetails(id);
+  const data = await getBrowseTaskDetails(id);
+
+  // Add null check for data
+  if (!data) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-6 min-h-screen">
+        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+          <p className="text-gray-500">Task not found</p>
+        </div>
+      </div>
+    );
+  }
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -44,6 +39,17 @@ const TasksDetails = async ({ params }) => {
         return "bg-amber-100 text-amber-700";
       default:
         return "bg-blue-100 text-blue-700";
+    }
+  };
+
+  const formatDate = (dateString) => {
+    try {
+      return new Date(dateString).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+      });
+    } catch {
+      return "N/A";
     }
   };
 
@@ -60,10 +66,10 @@ const TasksDetails = async ({ params }) => {
               </div>
               <div className="flex-1">
                 <h1 className="text-2xl font-bold text-gray-900 mb-1">
-                  {data?.title}
+                  {data?.title || "Untitled Task"}
                 </h1>
                 <p className="text-sm text-gray-500 capitalize">
-                  {data?.category}
+                  {data?.category || "N/A"}
                 </p>
               </div>
             </div>
@@ -72,18 +78,18 @@ const TasksDetails = async ({ params }) => {
           {/* Right: Client Card */}
           <div className="flex items-center gap-3 bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-4">
             <Image
-            width={120}
-            height={120}
+              width={48}
+              height={48}
               src={
                 data?.clientPhoto ||
                 "https://cdn-icons-png.flaticon.com/512/149/149071.png"
               }
-              alt={data?.clientName}
-              className="w-12 h-12 rounded-lg object-cover border border-cyan-200"
+              alt={data?.clientName || "Client"}
+              className="w-12 h-12 rounded-lg object-cover border border-cyan-200 flex-shrink-0"
             />
             <div className="flex-1 min-w-0">
               <h3 className="font-semibold text-sm text-gray-900 truncate">
-                {data?.clientName}
+                {data?.clientName || "Unknown Client"}
               </h3>
               <p className="text-xs text-gray-500">Project Owner</p>
             </div>
@@ -98,7 +104,7 @@ const TasksDetails = async ({ params }) => {
               <span className="text-xs text-gray-500">Budget</span>
             </div>
             <p className="text-lg font-bold text-gray-900">
-              ${data?.budget}
+              ${data?.budget || "0"}
             </p>
           </div>
 
@@ -108,10 +114,7 @@ const TasksDetails = async ({ params }) => {
               <span className="text-xs text-gray-500">Deadline</span>
             </div>
             <p className="text-lg font-bold text-gray-900">
-              {new Date(data?.deadline).toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-              })}
+              {data?.deadline ? formatDate(data.deadline) : "N/A"}
             </p>
           </div>
 
@@ -125,7 +128,7 @@ const TasksDetails = async ({ params }) => {
                 data?.status
               )}`}
             >
-              {data?.status}
+              {data?.status || "pending"}
             </span>
           </div>
 
@@ -151,7 +154,7 @@ const TasksDetails = async ({ params }) => {
               </h2>
             </div>
             <p className="text-sm text-gray-600 leading-6 line-clamp-4 bg-gray-50 rounded-xl p-4 border border-gray-200">
-              {data?.description}
+              {data?.description || "No description provided"}
             </p>
           </div>
 
@@ -160,22 +163,20 @@ const TasksDetails = async ({ params }) => {
             <h2 className="text-sm font-bold text-gray-900 mb-3">
               Client Info
             </h2>
-            <div className="space-y-2.5 rounded-xl border px-4 py-2">
+            <div className=" rounded-xl border px-4 py-3 bg-gray-50">
               <div className="flex items-start gap-2.5">
-                <User size={16} className="text-cyan-600 mt-0.5 flex-shrink-0" />
+                <User size={16} className="text-cyan-600  flex-shrink-0" />
                 <div className="min-w-0 flex-1">
-                 
                   <p className="text-sm font-semibold text-gray-900 truncate">
-                    {data?.clientName}
+                    {data?.clientName || "N/A"}
                   </p>
                 </div>
               </div>
               <div className="flex items-start gap-2.5">
-                <Mail size={16} className="text-cyan-600 mt-0.5 flex-shrink-0" />
+                <Mail size={16} className="text-cyan-600  flex-shrink-0" />
                 <div className="min-w-0 flex-1">
-                
                   <p className="text-sm font-semibold text-gray-900 break-all">
-                    {data?.clientEmail}
+                    {data?.clientEmail || "N/A"}
                   </p>
                 </div>
               </div>
@@ -185,7 +186,7 @@ const TasksDetails = async ({ params }) => {
 
         {/* Footer: Compact */}
         <div className="flex justify-between items-center pt-4 border-t border-gray-200">
-          <p className="text-xs text-gray-400">ID: {data?._id}</p>
+          <p className="text-xs text-gray-400">ID: {data?._id || "N/A"}</p>
           {userRole === "freelancer" && (
             <button className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-medium rounded-lg transition duration-300">
               Submit Proposal

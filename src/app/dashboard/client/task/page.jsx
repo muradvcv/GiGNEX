@@ -9,10 +9,11 @@ import {
   FileText,
 } from "lucide-react";
 import { getUserForServer } from "@/lib/user/getuser";
+import Search from "@/components/Search";
 
 const ClientTasks = async () => {
-  
-  const session=await getUserForServer()
+
+  const session = await getUserForServer()
 
   const clientId = session?.user?.id;
   const tasks = await getTaskByClient(clientId);
@@ -61,93 +62,133 @@ const ClientTasks = async () => {
   }
 
   return (
-    <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 px-10">
-      {tasks.map((task) => (
-        <Link
-          key={task._id}
-          href={`/dashboard/client/task/${task._id}`}
-          className="block"
-        >
-          <div className="bg-white rounded-[24px] border border-gray-200 p-10 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer h-full">
-            {/* Top */}
-            <div className="flex items-center justify-between">
-              <span
-                className={`inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-[11px] font-medium capitalize ${statusStyles[task.status] || "bg-gray-100 text-gray-700"
-                  }`}
-              >
-                {task.status === "completed" ? (
-                  <CircleCheckBig size={12} />
-                ) : (
-                  <Clock3 size={12} />
-                )}
-                {task.status}
-              </span>
+    <div>
+      <Search />
 
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium bg-cyan-100 text-cyan-700">
-                <FileText size={12} />
-                {task.proposalsCount || 0} Proposals
-              </span>
-            </div>
+      {/* Desktop Table */}
+      <div className="hidden md:block overflow-x-auto rounded-2xl border border-gray-200 bg-white shadow">
+        <table className="w-full">
+          <thead className="bg-gray-50">
+            <tr className="border-b">
+              <th className="px-6 py-4 text-left text-sm font-semibold">Title</th>
+              <th className="px-6 py-4 text-left text-sm font-semibold">Category</th>
+              <th className="px-6 py-4 text-left text-sm font-semibold">Budget</th>
+              <th className="px-6 py-4 text-left text-sm font-semibold">Deadline</th>
+              <th className="px-6 py-4 text-left text-sm font-semibold">Status</th>
+              <th className="px-6 py-4 text-left text-sm font-semibold">Proposals</th>
+              <th className="px-6 py-4 text-center text-sm font-semibold">
+                Action
+              </th>
+            </tr>
+          </thead>
 
-            {/* Title */}
-            <h2 className="mt-4 text-xl font-bold text-gray-900 line-clamp-2">
+          <tbody>
+            {tasks.map((task) => (
+              <tr key={task._id} className="border-b hover:bg-gray-50 transition">
+                <td className="px-6 py-5">
+                  <h3 className="font-semibold text-gray-900 line-clamp-1">
+                    {task.title}
+                  </h3>
+                </td>
+
+                <td className="px-6 py-5">
+                  <span
+                    className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium${categoryStyles[task.category] || "bg-gray-100 text-gray-700"
+                      }`}
+                  >
+                    <Briefcase size={13} />
+                    {task.category}
+                  </span>
+                </td>
+
+                <td className="px-6 py-5 font-semibold text-green-600">
+                  ${task.budget}
+                </td>
+
+                <td className="px-6 py-5 whitespace-nowrap text-xs">
+                  {new Date(task.deadline).toLocaleDateString("en-CA")}
+                </td>
+
+                <td className="px-6 py-5">
+                  <span
+                    className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium ${statusStyles[task.status] || "bg-gray-100 text-gray-700"
+                      }`}
+                  >
+                    {task.status === "completed" ? (
+                      <CircleCheckBig size={13} />
+                    ) : (
+                      <Clock3 size={13} />
+                    )}
+
+                    {task.status}
+                  </span>
+                </td>
+
+                <td className="px-6 py-5">
+                  <span className="inline-flex items-center gap-1">
+                    <FileText size={15} />
+                    {task.proposalsCount || 0}
+                  </span>
+                </td>
+
+                <td className="px-6 py-5 text-center">
+                  <Link href={`/dashboard/client/task/${task._id}`}>
+                    <button className="rounded-lg bg-cyan-500 px-4 py-2 text-sm font-medium text-white hover:bg-cyan-600 transition cursor-pointer">
+                      View
+                    </button>
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Mobile Cards */}
+      <div className="md:hidden space-y-3 mt-4">
+        {tasks.map((task) => (
+          <div
+            key={task._id}
+            className="border border-gray-200 rounded-xl p-4"
+          >
+            <h3 className="font-semibold text-gray-900 line-clamp-1">
               {task.title}
-            </h2>
+            </h3>
 
-            {/* Category */}
-            <div className="mt-2">
+            <div className="mt-3 flex items-center justify-between">
               <span
-                className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium ${categoryStyles[task.category] ||
-                  "bg-gray-100 text-gray-700"
+                className={`text-xs rounded-full px-2.5 py-1 ${categoryStyles[task.category] || "bg-gray-100 text-gray-700"
                   }`}
               >
-                <Briefcase size={12} />
                 {task.category}
               </span>
-            </div>
 
-            {/* Description */}
-            <p className=" text-sm text-gray-600 line-clamp-2 py-2">
-              {task.description}
-            </p>
-
-            {/* Divider */}
-            <div className="border-t border-gray-200 my-2"></div>
-
-            {/* Budget */}
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2 text-sm text-gray-700">
-                <CircleDollarSign size={16} />
-                <span>Budget</span>
-              </div>
-
-              <span className="font-bold text-green-600">
+              <span className="font-semibold text-green-600">
                 ${task.budget}
               </span>
             </div>
 
-            {/* Deadline */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 text-sm text-gray-700">
-                <Calendar size={16} />
-                <span>Deadline</span>
-              </div>
-
-              <span className="font-semibold text-sm text-gray-900">
+            <div className="mt-3 flex items-center justify-between text-xs text-gray-500">
+              <span>
                 {new Date(task.deadline).toLocaleDateString("en-CA")}
+              </span>
+
+              <span
+                className={`rounded-full px-2.5 py-1 ${statusStyles[task.status] || "bg-gray-100 text-gray-700"
+                  }`}
+              >
+                {task.status}
               </span>
             </div>
 
-            {/* Button */}
-            <button
-              type="button"
-              className="w-full mt-2 py-2 rounded-full border border-gray-200 bg-white font-medium hover:bg-gray-50 transition cursor-pointer text-xs"
-            >
-              View Details
-            </button>
+            <Link href={`/dashboard/client/task/${task._id}`}>
+              <button className="w-full mt-4 rounded-lg bg-cyan-500 py-2 text-sm font-medium text-white hover:bg-cyan-600">
+                View
+              </button>
+            </Link>
           </div>
-        </Link>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };

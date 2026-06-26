@@ -11,8 +11,7 @@ import { useSession } from "@/lib/auth-client";
 
 export default function DashboradSidebar() {
   const { data: session } = useSession();
-  const user=session?.user;
- 
+  const user = session?.user;
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -34,20 +33,19 @@ export default function DashboradSidebar() {
       { icon: Person, label: "Edit Profile", href: "/public/freelancers/editprofile" },
     ],
     admin: [
-      { icon: CirclePlus, label: "Overview", href: "/dashboard/moessages" },
-      { icon: CirclePlus, label: "User", href: "/dashboard/moessages" },
-      { icon: Archive, label: "Tasks", href: "/dashboard/proofile" },
-      { icon: CircleDollar, label: "Payments", href: "/dashboard/setotings" },
+      { icon: CirclePlus, label: "Overview", href: "/dashboard/messages" },
+      { icon: CirclePlus, label: "User", href: "/dashboard/users" },
+      { icon: Archive, label: "Tasks", href: "/dashboard/tasks" },
+      { icon: CircleDollar, label: "Payments", href: "/dashboard/payments" },
     ]
-  }
+  };
 
-  // condition for role wise dashboard
-  const navItems = DashboardItem[user?.role] || [];
+  // ✅ Role-wise নেভিগেশন (default 'client' যদি role না থাকে)
+  const navItems = DashboardItem[user?.role || "client"] || DashboardItem.client;
 
- 
+  // ✅ শুধু ড্রয়ার বন্ধ করুন, reload করবেন না
   const handleClose = () => {
     setOpen(false);
-    window.location.reload();
   };
 
   return (
@@ -122,16 +120,16 @@ export default function DashboradSidebar() {
                     <Link
                       key={item.label}
                       href={item.href}
-                      onClick={handleClose}
+                      onClick={handleClose} // 
                       className={`group flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition-all
                       ${isActive
-                          ? "bg-[#F8F0E3] text-[#F59E0B] shadow-md"
-                          : "text-gray-500 hover:text-black hover:bg-gray-50"
+                        ? "bg-[#f5e9f5a3] text-[#0b8cf5] shadow-md"
+                        : "text-gray-500 hover:text-black hover:bg-gray-50"
                         }`}
                     >
                       <item.icon
                         className={`size-5 ${isActive
-                          ? "text-[#F59E0B]"
+                          ? "text-[#0babf5]"
                           : "text-gray-500 group-hover:text-black"
                           }`}
                       />
