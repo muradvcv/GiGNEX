@@ -181,7 +181,7 @@ const BrowseTasks = async ({ searchParams }) => {
           <div className="flex justify-center items-center gap-2 mt-12 flex-wrap">
 
             {/* Previous */}
-            <Link
+            <Link className="shadow p-2 rounded-md border"
               href={`/public/browsetasks?page=${page - 1}&search=${search}`}
             >
               ← Previous
@@ -192,7 +192,7 @@ const BrowseTasks = async ({ searchParams }) => {
               const pageNumber = index + 1;
 
               return (
-                <Link
+                <Link className="shadow px-1 rounded-md border"
                   key={pageNumber}
                   href={`/public/browsetasks?page=${pageNumber}&search=${search}`}
                 >
@@ -202,7 +202,7 @@ const BrowseTasks = async ({ searchParams }) => {
             })}
 
             {/* Next */}
-            <Link
+            <Link className="shadow p-2 rounded-md border"
               href={`/public/browsetasks?page=${page + 1}&search=${search}`}
             >
               Next →

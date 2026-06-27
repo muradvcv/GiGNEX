@@ -11,6 +11,7 @@ import {
 import { getUserForServer } from "@/lib/user/getuser";
 import Image from "next/image";
 import { getBrowseTaskDetails } from "@/lib/api/tasks";
+import { ProposalModal } from "@/components/dashboard/freelancer/ProposalModal";
 
 const TasksDetails = async ({ params }) => {
   const { id } = await params;
@@ -188,9 +189,7 @@ const TasksDetails = async ({ params }) => {
         <div className="flex justify-between items-center pt-4 border-t border-gray-200">
           <p className="text-xs text-gray-400">ID: {data?._id || "N/A"}</p>
           {userRole === "freelancer" && (
-            <button className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-medium rounded-lg transition duration-300">
-              Submit Proposal
-            </button>
+            <ProposalModal/>
           )}
         </div>
       </div>

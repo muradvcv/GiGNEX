@@ -118,13 +118,18 @@ const ClientTaskDetails = async ({ params }) => {
           </h3>
 
           <div className="flex items-center gap-3">
-            <Image
-              src={task.clientPhoto}
-              alt={task.clientName}
-              width={40}
-              height={40}
-              className="rounded-full border"
-            />
+            <div className="flex items-center gap-3">
+              {task.clientPhoto ? (
+                <Image
+                  src={task.clientPhoto}
+                  alt={task.clientName}
+                  width={40}
+                  height={40}
+                />
+              ) : (
+                <div className="w-10 h-10 bg-gray-300 rounded-full" />
+              )}
+            </div>
 
             <div>
               <h4 className="font-medium text-gray-900">
