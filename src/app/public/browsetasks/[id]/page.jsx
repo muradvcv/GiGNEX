@@ -189,7 +189,14 @@ const TasksDetails = async ({ params }) => {
         <div className="flex justify-between items-center pt-4 border-t border-gray-200">
           <p className="text-xs text-gray-400">ID: {data?._id || "N/A"}</p>
           {userRole === "freelancer" && (
-            <ProposalModal/>
+            <ProposalModal
+              taskId={data?._id}
+              taskTitle={data?.title}
+              budget={data?.budget}
+              deadline={data?.deadline}
+              clientEmail={data?.clientEmail}
+              taskStatus={data?.status}
+            />
           )}
         </div>
       </div>
