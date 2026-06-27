@@ -21,7 +21,7 @@ export default function DashboradSidebar() {
       { icon: LayoutHeaderCells, label: "Overview", href: "/dashboard/client" },
       { icon: ListCheck, label: "My Tasks", href: "/dashboard/client/task" },
       { icon: CirclePlus, label: "Post Task", href: "/dashboard/client/task/new" },
-      { icon: Archive, label: "Proposals", href: "/dashboard/profile" },
+      { icon: Archive, label: "Proposals", href: "/dashboard/client/myproposals" },
       { icon: CircleDollar, label: "Payments", href: "/dashboard/settings" },
     ],
     freelancer: [

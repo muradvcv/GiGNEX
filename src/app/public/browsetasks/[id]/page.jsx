@@ -12,6 +12,7 @@ import { getUserForServer } from "@/lib/user/getuser";
 import Image from "next/image";
 import { getBrowseTaskDetails } from "@/lib/api/tasks";
 import { ProposalModal } from "@/components/dashboard/freelancer/ProposalModal";
+import TasksProposal from "@/components/dashboard/client/TasksProposal";
 
 const TasksDetails = async ({ params }) => {
   const { id } = await params;
@@ -200,6 +201,7 @@ const TasksDetails = async ({ params }) => {
           )}
         </div>
       </div>
+      <TasksProposal taskId={id} />
     </div>
   );
 };
