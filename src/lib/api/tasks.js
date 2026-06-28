@@ -1,11 +1,15 @@
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 
-export const getTaskByClient = async (clientId, status="open")=>{
+export const getTaskByClient = async (clientId, status) => {
+  let url = `${baseUrl}/api/tasks?clientId=${clientId}`;
 
-  const res = await fetch(`${baseUrl}/api/tasks?clientId=${clientId}&status=${status}`)
-  return res.json()
-}
+  if (status) {
+    url += `&status=${status}`;
+  }
 
+  const res = await fetch(url);
+  return res.json();
+};
 
 export const getTaskById = async (id) => {
   const res = await fetch(`${baseUrl}/api/tasks/${id}`, {

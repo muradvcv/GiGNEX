@@ -1,3 +1,4 @@
+import { postPayment } from '@/lib/actions/payment'
 import { stripe } from '@/lib/stripe'
 import { redirect } from 'next/navigation'
 
@@ -21,6 +22,8 @@ export default async function Success({ searchParams }) {
   }
 
   if (status === 'complete') {
+    // api call kore data send
+    await postPayment({...metadata,session_id})
     return (
       <section id="success">
         <p>

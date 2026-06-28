@@ -146,6 +146,32 @@ export default async function TaskProposalTow({ taskId }) {
                       value={taskId}
                     />
 
+                    {/* Selected Proposal ID */}
+                    <input
+                      type="hidden"
+                      name="proposalId"
+                      value={proposal._id}
+                    />
+
+                    {/* Freelancer Info */}
+                    <input
+                      type="hidden"
+                      name="freelancerId"
+                      value={proposal.freelancer_id}
+                    />
+
+                    <input
+                      type="hidden"
+                      name="freelancerEmail"
+                      value={proposal.freelancer_email}
+                    />
+
+                    <input
+                      type="hidden"
+                      name="freelancerName"
+                      value={proposal.freelancer_name}
+                    />
+
                     <button
                       type="submit"
                       className="rounded-lg bg-green-600 px-5 py-2 text-sm font-semibold text-white"

@@ -7,12 +7,18 @@ export async function POST(req) {
   try {
     const headersList = await headers();
     const origin = headersList.get("origin");
-    
+
     const formData = await req.formData();
 
     const amount = Number(formData.get("amount"));
     const productName = formData.get("productName");
     const taskId = formData.get("taskId");
+
+    // NEW
+    const proposalId = formData.get("proposalId");
+    const freelancerId = formData.get("freelancerId");
+    const freelancerEmail = formData.get("freelancerEmail");
+    const freelancerName = formData.get("freelancerName");
 
     const PaymentUser = await getUserForServer();
     const user = PaymentUser.user;
@@ -35,11 +41,13 @@ export async function POST(req) {
       ],
 
       metadata: {
+        proposalId,
         taskId,
         amount: amount.toString(),
-        userID: user.id,
-        userEmail: user.email,
-        userName: user.name,
+
+        freelancerId,
+        freelancerEmail,
+        freelancerName,
       },
 
       success_url: `${origin}/pricing/success?session_id={CHECKOUT_SESSION_ID}`,

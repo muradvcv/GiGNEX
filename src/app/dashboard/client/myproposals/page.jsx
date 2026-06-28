@@ -65,11 +65,6 @@ export default async function ClientProposalPage() {
                 <th className="px-6 py-4 text-left">
                   Status
                 </th>
-
-                <th className="px-6 py-4 text-center">
-                  Action
-                </th>
-
               </tr>
 
             </thead>
@@ -166,32 +161,7 @@ export default async function ClientProposalPage() {
 
                   </td>
 
-                  <td className="px-6">
-
-                    <div className="flex justify-center gap-2">
-
-                      <Button
-                        isIconOnly
-                        radius="full"
-                        variant="light"
-                        className="w-full border border-green-200 shadow-sm hover:shadow-md hover:bg-green-50 transition-all duration-200"
-                        aria-label="Accept"
-                      >
-                        <Check className="h-5 w-5 text-green-600" />
-                      </Button>
-
-                      <Button
-                        isIconOnly
-                        radius="full"
-                        variant="light"
-                        className="w-full border border-red-200 shadow-sm hover:shadow-md hover:bg-red-50 transition-all duration-200"
-                        aria-label="Reject"
-                      >
-                        <X className="h-5 w-5 text-red-600" />
-                      </Button>
-                    </div>
-
-                  </td>
+        
 
                 </tr>
 

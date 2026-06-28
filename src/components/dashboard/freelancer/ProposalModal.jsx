@@ -38,10 +38,12 @@ export function ProposalModal({
       task_id: taskId,
       task_title: taskTitle,
       client_email: clientEmail,
+
       proposed_budget: Number(form.proposed_budget.value),
       estimated_days: Number(form.estimated_days.value),
       cover_note: form.cover_note.value,
 
+      freelancer_id: freelancer?.id,     
       freelancer_email: freelancer?.email,
       freelancer_name: freelancer?.name,
       freelancer_image: freelancer?.image,
@@ -50,6 +52,7 @@ export function ProposalModal({
       taskStatus,
       submitted_at: new Date().toISOString(),
     };
+   
 
     try {
       await CreateProposal(proposal);
