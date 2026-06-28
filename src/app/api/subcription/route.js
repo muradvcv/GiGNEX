@@ -41,13 +41,17 @@ export async function POST(req) {
       ],
 
       metadata: {
+        // freelancer
         proposalId,
         taskId,
         amount: amount.toString(),
-
         freelancerId,
         freelancerEmail,
         freelancerName,
+        // client 
+        clientId: user.id,
+        clientName: user.name,
+        clientEmail: user.email,
       },
 
       success_url: `${origin}/pricing/success?session_id={CHECKOUT_SESSION_ID}`,

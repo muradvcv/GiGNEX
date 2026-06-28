@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import {
   ListCheck,
@@ -14,13 +13,21 @@ import {
 import { Card, Button } from "@heroui/react";
 import { getTaskByClient } from "@/lib/api/tasks";
 import { getUserForServer } from "@/lib/user/getuser";
+import { getPaymentByClient } from "@/lib/actions/payment";
 
 export default async function Overview() {
   const session = await getUserForServer();
 
   const clientId = session?.user?.id;
+  if (!clientId) return null;
 
   const tasks = await getTaskByClient(clientId);
+
+  // ✅ PAYMENT FETCH
+  const result = await getPaymentByClient(clientId);
+  const payments = result?.data || [];
+
+
 
   const totalTasks = tasks?.length || 0;
 
@@ -28,15 +35,16 @@ export default async function Overview() {
     tasks?.filter((task) => task.status === "open").length || 0;
 
   const inProgressTasks =
-    tasks?.filter((task) => task.status === "in-progress").length || 0;
+    tasks?.filter((task) => task.status === "in_progress").length || 0;
 
   const completedTasks =
     tasks?.filter((task) => task.status === "completed").length || 0;
 
-  const totalSpent =
-    tasks
-      ?.filter((task) => task.status === "completed")
-      .reduce((sum, task) => sum + Number(task.budget || 0), 0) || 0;
+  // ✅ TOTAL AMOUNT FIXED
+  const totalAmount =
+    payments.reduce((sum, item) => {
+      return sum + Number(item.amount || 0);
+    }, 0);
 
   const stats = [
     {
@@ -63,10 +71,13 @@ export default async function Overview() {
       description: "Successfully finished",
       icon: CircleCheckBig,
     },
+
+
+    // 🔥 NEW FIXED TOTAL PAYMENT CARD
     {
-      title: "Total Spent",
-      value: `$${totalSpent}`,
-      description: "Total money paid",
+      title: "Total Earned",
+      value: `$${totalAmount}`,
+      description: "Total payment received",
       icon: DollarSign,
     },
   ];
@@ -99,10 +110,7 @@ export default async function Overview() {
                 </div>
 
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-50">
-                  <Icon
-                    size={20}
-                    className="text-cyan-500"
-                  />
+                  <Icon size={20} className="text-cyan-500" />
                 </div>
               </div>
             </Card>
@@ -131,19 +139,15 @@ export default async function Overview() {
           <Card className="min-h-[420px] border border-default-200 shadow-none">
             <div className="flex h-[420px] flex-col items-center justify-center px-4 text-center">
               <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-default-100">
-                <ClipboardList
-                  size={38}
-                  className="text-default-500"
-                />
+                <ClipboardList size={38} className="text-default-500" />
               </div>
 
-              <h3 className="text-3xl font-bold">
-                No tasks yet
-              </h3>
+              <h3 className="text-3xl font-bold">No tasks yet</h3>
 
               <p className="mt-2 text-default-500">
                 Post your first task to find talented freelancers
               </p>
+
               <Link href="/dashboard/client/task/new">
                 <Button className="mt-6 bg-cyan-500 text-white">
                   Post a Task
@@ -156,8 +160,7 @@ export default async function Overview() {
             {tasks
               .sort(
                 (a, b) =>
-                  new Date(b.createdAt) -
-                  new Date(a.createdAt)
+                  new Date(b.createdAt) - new Date(a.createdAt)
               )
               .slice(0, 4)
               .map((task) => (
@@ -179,10 +182,10 @@ export default async function Overview() {
 
                       <span
                         className={`px-2.5 py-1 rounded-full text-[10px] font-medium capitalize ${task.status === "open"
-                            ? "bg-green-100 text-green-700"
-                            : task.status === "in-progress"
-                              ? "bg-amber-100 text-amber-700"
-                              : "bg-gray-100 text-purple-600"
+                          ? "bg-green-100 text-green-700"
+                          : task.status === "in-progress"
+                            ? "bg-amber-100 text-amber-700"
+                            : "bg-gray-100 text-purple-600"
                           }`}
                       >
                         {task.status}
@@ -201,18 +204,14 @@ export default async function Overview() {
 
                       <div className="flex items-center gap-1 text-default-500">
                         <Calendar size={14} />
-                        {new Date(
-                          task.deadline
-                        ).toLocaleDateString()}
+                        {new Date(task.deadline).toLocaleDateString()}
                       </div>
                     </div>
 
                     <div className="mt-4 flex items-center justify-between border-t pt-3">
                       <span className="text-xs text-default-400">
                         Created:{" "}
-                        {new Date(
-                          task.createdAt
-                        ).toLocaleDateString()}
+                        {new Date(task.createdAt).toLocaleDateString()}
                       </span>
 
                       <div className="flex items-center gap-1 text-cyan-500 text-sm font-medium">

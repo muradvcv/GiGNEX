@@ -11,8 +11,8 @@ export default function DashboardLayout({ children }) {
       {/* Right Section */}
       <div className="flex flex-1 flex-col overflow-hidden">
         {/* Navbar */}
-        <div className="h-16 border-b flex items-center px-5">
-          navbar
+        <div className="">
+         
         </div>
 
         {/* Scrollable Content */}

@@ -14,3 +14,18 @@ export const postPayment=async(data)=>{
   return resData;
 
 }
+
+// get payment by client id
+export const getPaymentByClient = async (clientId) => {
+  console.log("clientId:", clientId);
+
+  const res = await fetch(
+    `${baseUrl}/api/payments/client/${clientId}`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  return res.json();
+};
+
