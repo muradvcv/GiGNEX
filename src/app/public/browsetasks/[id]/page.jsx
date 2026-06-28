@@ -15,6 +15,7 @@ import { ProposalModal } from "@/components/dashboard/freelancer/ProposalModal";
 import TasksProposal from "@/components/dashboard/client/TasksProposal";
 
 const TasksDetails = async ({ params }) => {
+
   const { id } = await params;
 
   const session = await getUserForServer();
@@ -89,11 +90,27 @@ const TasksDetails = async ({ params }) => {
               alt={data?.clientName || "Client"}
               className="w-12 h-12 rounded-lg object-cover border border-cyan-200 flex-shrink-0"
             />
-            <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-sm text-gray-900 truncate">
-                {data?.clientName || "Unknown Client"}
-              </h3>
-              <p className="text-xs text-gray-500">Project Owner</p>
+            {/* Client Info */}
+            <div>
+
+
+              <div className="flex items-start gap-2.5">
+                <User size={16} className="text-cyan-600  flex-shrink-0" />
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-semibold text-gray-900 truncate">
+                    {data?.clientName || "N/A"}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <Mail size={16} className="text-cyan-600  flex-shrink-0" />
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-semibold text-gray-900 break-all">
+                    {data?.clientEmail || "N/A"}
+                  </p>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -137,10 +154,10 @@ const TasksDetails = async ({ params }) => {
           <div className="bg-gray-50 border border-gray-200 rounded-xl p-3.5 hover:border-cyan-200 transition">
             <div className="flex items-center gap-2 mb-1.5">
               <User size={16} className="text-purple-600" />
-              <span className="text-xs text-gray-500">Proposals</span>
+              <span className="text-xs text-gray-500">Category</span>
             </div>
-            <p className="text-lg font-bold text-gray-900">
-              {data?.proposalsCount || 0}
+            <p className="text-xs font-bold  text-purple-700">
+              {data.category}
             </p>
           </div>
         </div>
@@ -160,30 +177,7 @@ const TasksDetails = async ({ params }) => {
             </p>
           </div>
 
-          {/* Client Info */}
-          <div>
-            <h2 className="text-sm font-bold text-gray-900 mb-3">
-              Client Info
-            </h2>
-            <div className=" rounded-xl border px-4 py-3 bg-gray-50">
-              <div className="flex items-start gap-2.5">
-                <User size={16} className="text-cyan-600  flex-shrink-0" />
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-semibold text-gray-900 truncate">
-                    {data?.clientName || "N/A"}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-2.5">
-                <Mail size={16} className="text-cyan-600  flex-shrink-0" />
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-semibold text-gray-900 break-all">
-                    {data?.clientEmail || "N/A"}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+
         </div>
 
         {/* Footer: Compact */}

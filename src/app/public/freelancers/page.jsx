@@ -5,20 +5,7 @@ import {
   CircleDollarSign,
   ArrowRight,
 } from "lucide-react";
-
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
-async function getFreelancers() {
-  const res = await fetch(`${baseUrl}/api/freelancers`, {
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch freelancers");
-  }
-
-  return res.json();
-}
+import { getFreelancers } from "@/lib/user/getFreelancers";
 
 const Freelancer = async () => {
   const freelancers = await getFreelancers();

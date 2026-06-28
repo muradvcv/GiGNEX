@@ -14,10 +14,10 @@ import {
   X,
   Check,
 } from "lucide-react";
+import Image from "next/image";
 
 export default async function ClientProposalPage() {
   const session = await getUserForServer();
-
   const proposals = await getProposalByClient(session.user.email);
 
   return (
@@ -87,11 +87,13 @@ export default async function ClientProposalPage() {
 
                     <div className="flex items-center gap-3">
 
-                      <Avatar
+                      <Image
                         src={proposal.freelancer_image}
-                        size="md"
+                        alt="Freelancer"
+                        width={48}
+                        height={48}
+                        className="w-12 h-12 rounded-full object-cover border-2 border-blue-100 shadow-sm"
                       />
-
                       <div>
 
                         <h2 className="font-semibold">

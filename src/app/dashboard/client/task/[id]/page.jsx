@@ -9,6 +9,7 @@ import Image from "next/image";
 import { getTaskById } from "@/lib/api/tasks";
 import TaskEditModal from "@/components/dashboard/client/TaskEditModal";
 import DeleteTaskButton from "@/components/dashboard/client/DeleteTaskButton";
+import TaskProposalTow from "@/components/dashboard/client/TaskProposal";
 
 const ClientTaskDetails = async ({ params }) => {
   const { id } = await params;
@@ -154,6 +155,7 @@ const ClientTaskDetails = async ({ params }) => {
             )}
         </div>
       </div>
+      <TaskProposalTow taskId={id}/>
     </div>
   );
 };

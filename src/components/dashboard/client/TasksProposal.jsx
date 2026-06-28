@@ -5,138 +5,103 @@ import {
   DollarSign,
   CalendarDays,
   FileText,
-  BadgeCheck,
+  CheckCircle2,
+  XCircle,
+  Clock3,
+  User2,
 } from "lucide-react";
 
 export default async function TasksProposal({ taskId }) {
   const proposals = await getProposalByTask(taskId);
 
   return (
-    <div className="mt-5">
+    <div className="mt-6">
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold text-gray-800">
+      <div className="flex items-center justify-between mb-5">
+        <h2 className="text-xl font-bold text-slate-800">
           Proposals
         </h2>
 
-        <span className="bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded-full">
-          {proposals.length} Total
-        </span>
+        <div className="rounded-full bg-indigo-100 text-indigo-700 px-3 py-1 text-sm font-semibold flex gap-2 justify-center items-center">
+          <User2 />Total Proposal : <span className="text-xl"> {proposals.length}</span>
+        </div>
       </div>
 
       {proposals.length === 0 ? (
-        <div className="border rounded-xl bg-gray-50 py-8 flex flex-col items-center justify-center">
-          <FileText className="text-gray-400 mb-2" size={35} />
-          <p className="text-gray-500 text-sm">No proposals yet.</p>
+        <div className="rounded-2xl border border-slate-200 bg-slate-50 py-10 flex flex-col items-center justify-center">
+          <FileText size={40} className="text-slate-400 mb-3" />
+          <p className="text-slate-500">No proposals yet.</p>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-4">
           {proposals.map((proposal) => (
             <div
               key={proposal._id}
-              className="bg-white border rounded-xl shadow-sm hover:shadow-md transition-all duration-300 p-4"
+              className="rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 via-white to-blue-50 p-5 shadow-sm hover:shadow-lg hover:border-blue-200 transition-all duration-300"
             >
-              {/* Header */}
-              <div className="flex justify-between items-center border-b pb-2 mb-3">
-                <div className="flex items-center gap-3">
-                  <div className="bg-blue-100 p-2 rounded-full">
-                    <User className="text-blue-600" size={18} />
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold text-base text-gray-800">
-                      {proposal.freelancer_name}
-                    </h3>
-
-                    <p className="flex items-center gap-1 text-xs text-gray-500">
-                      <Mail size={13} />
-                      {proposal.freelancer_email}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Profile | Budget | Days | Status */}
-              <div className="grid grid-cols-4 gap-3 border-b pb-3 mb-3">
-                {/* Profile */}
-                <div className="flex flex-col items-center text-center">
-                  <User className="text-blue-600" size={18} />
-                  <span className="text-[10px] text-gray-500 mt-1">
-                    Profile
-                  </span>
-                  <span className="text-xs font-semibold truncate w-full">
+              {/* Top */}
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                {/* Left */}
+                <div>
+                  <h3 className="flex items-center gap-2 text-lg font-bold text-slate-800">
+                    <User size={18} className="text-blue-600" />
                     {proposal.freelancer_name}
-                  </span>
+                  </h3>
+
+                  <p className="mt-1 flex items-center gap-1 text-sm text-slate-500">
+                    <Mail size={14} />
+                    {proposal.freelancer_email}
+                  </p>
                 </div>
 
-                {/* Budget */}
-                <div className="flex flex-col items-center text-center">
-                  <DollarSign className="text-green-600" size={18} />
-                  <span className="text-[10px] text-gray-500 mt-1">
-                    Budget
-                  </span>
-                  <span className="text-xs font-semibold text-green-700">
+                {/* Right */}
+                <div className="flex flex-wrap items-center gap-3">
+                  {/* Budget */}
+                  <div className="flex items-center gap-1 rounded-lg bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-700 border border-emerald-100">
+                    <DollarSign size={16} />
                     ${proposal.proposed_budget}
-                  </span>
-                </div>
+                  </div>
 
-                {/* Days */}
-                <div className="flex flex-col items-center text-center">
-                  <CalendarDays
-                    className="text-purple-600"
-                    size={18}
-                  />
-                  <span className="text-[10px] text-gray-500 mt-1">
-                    Days
-                  </span>
-                  <span className="text-xs font-semibold text-purple-700">
-                    {proposal.estimated_days}
-                  </span>
-                </div>
+                  {/* Days */}
+                  <div className="flex items-center gap-1 rounded-lg bg-violet-50 px-3 py-2 text-sm font-semibold text-violet-700 border border-violet-100">
+                    <CalendarDays size={16} />
+                    {proposal.estimated_days} Days
+                  </div>
 
-                {/* Status */}
-                <div className="flex flex-col items-center text-center">
-                  <BadgeCheck
-                    size={18}
-                    className={
-                      proposal.status === "accepted"
-                        ? "text-green-600"
+                  {/* Status */}
+                  <div
+                    className={`flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-semibold border ${proposal.status === "accepted"
+                        ? "bg-emerald-100 text-emerald-700 border-emerald-200"
                         : proposal.status === "rejected"
-                          ? "text-red-600"
-                          : "text-yellow-600"
-                    }
-                  />
-
-                  <span className="text-[10px] text-gray-500 mt-1">
-                    Status
-                  </span>
-
-                  <span
-                    className={`text-xs font-semibold capitalize ${proposal.status === "accepted"
-                        ? "text-green-600"
-                        : proposal.status === "rejected"
-                          ? "text-red-600"
-                          : "text-yellow-600"
+                          ? "bg-rose-100 text-rose-700 border-rose-200"
+                          : "bg-amber-100 text-amber-700 border-amber-200"
                       }`}
                   >
-                    {proposal.status}
-                  </span>
+                    {proposal.status === "accepted" ? (
+                      <CheckCircle2 size={16} />
+                    ) : proposal.status === "rejected" ? (
+                      <XCircle size={16} />
+                    ) : (
+                      <Clock3 size={16} />
+                    )}
+
+                    <span className="capitalize">
+                      {proposal.status}
+                    </span>
+                  </div>
                 </div>
               </div>
 
               {/* Cover Note */}
-              <div className="bg-gray-50 rounded-lg p-3">
-                <div className="flex items-center gap-2 mb-1">
-                  <FileText
-                    className="text-indigo-600"
-                    size={16}
-                  />
-                  <h4 className="text-sm font-semibold text-gray-700">
+              <div className="mt-5 rounded-xl border border-blue-100 bg-blue-50/60 p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <FileText size={16} className="text-blue-600" />
+                  <h4 className="font-semibold text-slate-700">
                     Cover Note
                   </h4>
                 </div>
 
-                <p className="text-sm text-gray-600">
+                <p className="text-sm leading-7 text-slate-600">
                   {proposal.cover_note}
                 </p>
               </div>
