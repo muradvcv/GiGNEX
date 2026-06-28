@@ -28,8 +28,8 @@ export default function DashboradSidebar() {
       { icon: LayoutHeaderCells, label: "Overview", href: "/dashboard/freelancer" },
       { icon: Magnifier, label: "Browse Tasks", href: "/public/browsetasks" },
       { icon: ListCheck, label: "My Proposals", href: "/dashboard/freelancer/myproposal" },
-      { icon: Folder, label: "Active Projects", href: "/dashboard/projects" },
-      { icon: CircleDollar, label: "Earnings", href: "/dashboard/earnings" },
+      { icon: Folder, label: "Active Projects", href: "/dashboard/freelancer/activeprojects" },
+      { icon: CircleDollar, label: "Earnings", href: "/dashboard/freelancer/payment" },
       { icon: Person, label: "Edit Profile", href: "/public/freelancers/editprofile" },
     ],
     admin: [

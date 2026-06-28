@@ -73,11 +73,11 @@ export default async function Overview() {
     },
 
 
-    // 🔥 NEW FIXED TOTAL PAYMENT CARD
+    //  NEW TOTAL PAYMENT CARD
     {
-      title: "Total Earned",
+      title: "Total spent",
       value: `$${totalAmount}`,
-      description: "Total payment received",
+      description: "Total payment sent",
       icon: DollarSign,
     },
   ];

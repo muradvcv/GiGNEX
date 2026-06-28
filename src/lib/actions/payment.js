@@ -29,3 +29,16 @@ export const getPaymentByClient = async (clientId) => {
   return res.json();
 };
 
+
+
+// get paymetn by freelacer
+export const getPaymentByFreelancer = async (freelancerId) => {
+  const res = await fetch(
+    `${baseUrl}/api/payments/freelancer/${freelancerId}`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  return res.json();
+};
