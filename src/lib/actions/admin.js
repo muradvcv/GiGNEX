@@ -39,3 +39,70 @@ export const getAllUser = async () => {
     return null;
   }
 };
+
+
+// get all task for admin
+export const getAllTasks = async () => {
+  try {
+    const res = await fetch(`${baseUrl}/api/admin/tasks`, {
+      method: "GET",
+      cache: "no-store",
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.message || "Failed to fetch tasks");
+    }
+
+    return data;
+  } catch (error) {
+    return {
+      success: false,
+      message: error.message,
+      data: [],
+    };
+  }
+};
+
+// delete task by admin
+export const deleteTaskByAdmin = async (id) => {
+  try {
+    const res = await fetch(`${baseUrl}/api/admin/tasks/${id}`, {
+      method: "DELETE",
+      cache: "no-store",
+    });
+
+    return await res.json();
+  } catch (error) {
+    return {
+      success: false,
+      message: error.message,
+    };
+  }
+};
+
+
+
+// get all payment data
+export const getAllPaymentdata = async () => {
+  try {
+    const res = await fetch(`${baseUrl}/api/admin/payments`, {
+      cache: "no-store",
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.message || "Failed to fetch payments");
+    }
+
+    return data;
+  } catch (error) {
+    return {
+      success: false,
+      message: error.message,
+      data: [],
+    };
+  }
+};
