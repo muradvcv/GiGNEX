@@ -4,8 +4,6 @@ import React from "react";
 import { Link } from "@heroui/react";
 import {
   FaInstagram,
-  FaTwitter,
-  FaLinkedin,
   FaFacebookF,
   FaEnvelope,
   FaLinkedinIn
@@ -16,50 +14,39 @@ import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
 
-    // dashboard er jonno nav hide
-    const pathname = usePathname();
-  
-    if (pathname?.startsWith("/dashboard")) {
-      return null;
-    }
+  // Dashboard-এর জন্য ফুটার হাইড রাখা হয়েছে
+  if (pathname?.startsWith("/dashboard")) {
+    return null;
+  }
 
   return (
-    <footer className="w-full bg-slate-50 border-t border-slate-200 text-slate-600 py-12 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-6 gap-8">
+    <footer className="w-full bg-slate-50 border-t border-slate-200 text-slate-600 py-12 px-6 md:px-12 font-sans">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
 
-
-        <div className="col-span-2 flex flex-col justify-between space-y-4">
+        {/* Brand Section */}
+        <div className="sm:col-span-2 flex flex-col justify-between space-y-6">
           <div>
-            <div className="flex items-center gap-3">
+            <Link
+              href="/"
+              className="flex items-center gap-3 text-inherit no-underline hover:opacity-90 transition-opacity"
+            >
+              <Image
+                src="/logoR.png"
+                alt="GIGNEX Logo"
+                width={36}
+                height={36}
+                priority
+                className="object-contain"
+              />
+              <span className="font-extrabold text-2xl tracking-tight">
+                <span className="text-[#06B6D4]">Skill</span>
+                <span className="text-[#7700ff]">Swap</span>
+              </span>
+            </Link>
 
-
-              {/* Logo */}
-              <Link
-                href="/"
-                className="flex items-center gap-3 text-inherit no-underline"
-              >
-                <Image
-                  src="/logoR.png"
-                  alt="GIGNEX Logo"
-                  width={36}
-                  height={36}
-                  priority
-                />
-                <span className="font-extrabold text-2xl tracking-tight">
-
-                  <span className="text-[#06B6D4]">Skill</span>
-
-
-                  <span className="text-[#7700ff]">Swap</span>
-                </span>
-              </Link>
-
-
-
-            </div>
-
-            <p className="mt-4 text-sm text-slate-500 max-w-xs">
+            <p className="mt-4 text-sm text-slate-500 max-w-xs leading-relaxed">
               Connect with top freelance talent or find your next big project today.
             </p>
           </div>
@@ -70,86 +57,75 @@ export default function Footer() {
         </div>
 
         {/* Quick Links */}
-        <div className="flex flex-col space-y-3">
-          <h4 className="font-semibold text-slate-900 text-sm">Quick Links</h4>
-          <ul className="space-y-2 text-sm">
-            <li><Link href="#">Home</Link></li>
-            <li><Link href="#">Browse Tasks</Link></li>
-            <li><Link href="#">Browse Freelancers</Link></li>
-            <li><Link href="#">How It Works</Link></li>
-            <li><Link href="#">Categories</Link></li>
+        <div className="flex flex-col space-y-4">
+          <h4 className="font-semibold text-slate-900 text-sm tracking-wider uppercase">Quick Links</h4>
+          <ul className="space-y-2.5 text-sm">
+            <li><Link href="/" className="text-slate-600 hover:text-[#06B6D4] transition-colors">Home</Link></li>
+            <li><Link href="/public/browsetasks" className="text-slate-600 hover:text-[#06B6D4] transition-colors">Browse Tasks</Link></li>
+            <li><Link href="/public/freelancers" className="text-slate-600 hover:text-[#06B6D4] transition-colors">Browse Freelancers</Link></li>
+            <li><Link href="#" className="text-slate-600 hover:text-[#06B6D4] transition-colors">How It Works</Link></li>
+            <li><Link href="#" className="text-slate-600 hover:text-[#06B6D4] transition-colors">Categories</Link></li>
           </ul>
         </div>
 
-        {/* Clients */}
-        <div className="flex flex-col space-y-3">
-          <h4 className="font-semibold text-slate-900 text-sm">For Clients</h4>
-          <ul className="space-y-2 text-sm">
-            <li><Link href="#">Post a Task</Link></li>
-            <li><Link href="#">My Tasks</Link></li>
-            <li><Link href="#">Proposals</Link></li>
+        {/* Support */}
+        <div className="flex flex-col space-y-4">
+          <h4 className="font-semibold text-slate-900 text-sm tracking-wider uppercase">Support</h4>
+          <ul className="space-y-2.5 text-sm">
+            <li><Link href="#" className="text-slate-600 hover:text-[#06B6D4] transition-colors">Help Center</Link></li>
+            <li><Link href="#" className="text-slate-600 hover:text-[#06B6D4] transition-colors">Contact Us</Link></li>
+            <li><Link href="#" className="text-slate-600 hover:text-[#06B6D4] transition-colors">Terms of Service</Link></li>
+            <li><Link href="#" className="text-slate-600 hover:text-[#06B6D4] transition-colors">Privacy Policy</Link></li>
           </ul>
         </div>
 
-        {/* Freelancers */}
-        <div className="flex flex-col space-y-3">
-          <h4 className="font-semibold text-slate-900 text-sm">For Freelancers</h4>
-          <ul className="space-y-2 text-sm">
-            <li><Link href="#">Browse Tasks</Link></li>
-            <li><Link href="#">My Proposals</Link></li>
-            <li><Link href="#">Earnings</Link></li>
-          </ul>
-        </div>
-
-        {/* Support + Social */}
-        <div className="col-span-2 md:col-span-1 flex flex-col space-y-6">
-
-          {/* Support */}
-          <div className="flex flex-col space-y-3">
-            <h4 className="font-semibold text-slate-900 text-sm">Support</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="#">Help Center</Link></li>
-              <li><Link href="#">Contact Us</Link></li>
-              <li><Link href="#">Terms</Link></li>
-              <li><Link href="#">Privacy</Link></li>
-            </ul>
-          </div>
-
-          {/* Social Icons */}
-          <div className="flex items-center gap-2">
-            <a
-              href="#"
-              className="w-8 h-8 flex items-center justify-center rounded-full bg-[#06B6D4] text-white hover:bg-[#7700ff] transition-all duration-300"
-            >
-              <FaXTwitter size={14} />
-            </a>
-
-            <a
-              href="#"
-              className="w-8 h-8 flex items-center justify-center rounded-full bg-[#06B6D4] text-white hover:bg-[#7700ff] transition-all duration-300"
-            >
-              <FaFacebookF size={14} />
-            </a>
-
-            <a
-              href="#"
-              className="w-8 h-8 flex items-center justify-center rounded-full bg-[#06B6D4] text-white hover:bg-[#7700ff] transition-all duration-300"
-            >
-              <FaLinkedinIn size={14} />
-            </a>
-
-            <a
-              href="#"
-              className="w-8 h-8 flex items-center justify-center rounded-full bg-[#06B6D4] text-white hover:bg-[#7700ff] transition-all duration-300"
-            >
-              <FaInstagram size={14} />
-            </a>
-          </div>
+        {/* Contact & Social Component */}
+        <div className="flex flex-col space-y-4">
+          <h4 className="font-semibold text-slate-900 text-sm tracking-wider uppercase">Contact Us</h4>
 
           {/* Email */}
-          <div className="flex items-center gap-2 text-xs text-slate-500">
-            <FaEnvelope size={14} />
+          <div className="flex items-center gap-2.5 text-sm text-slate-600 hover:text-[#06B6D4] transition-colors cursor-pointer">
+            <FaEnvelope size={16} className="text-slate-400" />
             <span>info@gignex.com</span>
+          </div>
+
+          {/* Official Social Icons */}
+          <div className="flex items-center gap-3 pt-2">
+            {/* X / Twitter */}
+            <a
+              href="#"
+              aria-label="Twitter"
+              className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-200 text-slate-700 hover:bg-black hover:text-white transition-all duration-300 shadow-sm"
+            >
+              <FaXTwitter size={15} />
+            </a>
+
+            {/* Facebook */}
+            <a
+              href="#"
+              aria-label="Facebook"
+              className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-200 text-slate-700 hover:bg-[#1877F2] hover:text-white transition-all duration-300 shadow-sm"
+            >
+              <FaFacebookF size={15} />
+            </a>
+
+            {/* LinkedIn */}
+            <a
+              href="#"
+              aria-label="LinkedIn"
+              className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-200 text-slate-700 hover:bg-[#0077B5] hover:text-white transition-all duration-300 shadow-sm"
+            >
+              <FaLinkedinIn size={15} />
+            </a>
+
+            {/* Instagram */}
+            <a
+              href="#"
+              aria-label="Instagram"
+              className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-200 text-slate-700 hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:text-white transition-all duration-300 shadow-sm"
+            >
+              <FaInstagram size={16} />
+            </a>
           </div>
         </div>
 
