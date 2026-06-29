@@ -10,6 +10,7 @@ import { getTaskById } from "@/lib/api/tasks";
 import TaskEditModal from "@/components/dashboard/client/TaskEditModal";
 import DeleteTaskButton from "@/components/dashboard/client/DeleteTaskButton";
 import TaskProposalTow from "@/components/dashboard/client/TaskProposal";
+import DeliverlFrom from "@/components/dashboard/client/DeliverlFrom";
 
 const ClientTaskDetails = async ({ params }) => {
   const { id } = await params;
@@ -91,9 +92,9 @@ const ClientTaskDetails = async ({ params }) => {
           </div>
 
           <div className="border rounded-2xl p-3">
-            <p className="text-xs text-gray-500">Proposals</p>
-            <h3 className="font-bold text-lg">
-              {task.proposalsCount}
+            <p className="text-xs text-gray-500">Status</p>
+            <h3 className="font-bold text-xs text-cyan-600">
+              {task.status}
             </h3>
           </div>
 
@@ -143,6 +144,10 @@ const ClientTaskDetails = async ({ params }) => {
             </div>
           </div>
         </div>
+
+        {task.status === "completed" && (
+          <DeliverlFrom task={task}/>
+        )}
 
         {/* Actions */}
         <div className="mt-5 pt-4 border-t flex flex-wrap gap-3">

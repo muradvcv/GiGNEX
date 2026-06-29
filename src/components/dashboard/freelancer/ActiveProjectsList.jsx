@@ -12,6 +12,7 @@ import {
   CheckCircle2,
   Clock3,
 } from "lucide-react";
+import DeliverableModal from "./DelivealModal";
 
 const ActiveProjectsList = ({ projects = [] }) => {
   const [tab, setTab] = useState("in_progress");
@@ -147,13 +148,10 @@ const ActiveProjectsList = ({ projects = [] }) => {
               <div className="mt-6 flex justify-end">
 
                 {project.status === "in_progress" ? (
-                  <Button
-                    color="primary"
-                    radius="md"
-                    startContent={<Send size={16} />}
-                  >
-                    Submit Deliverable
-                  </Button>
+                  <DeliverableModal
+                    task={project}
+                    taskId={project._id}
+                  />
                 ) : (
                   <Button
                     color="success"
