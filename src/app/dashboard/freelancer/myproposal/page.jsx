@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useSession } from "@/lib/auth-client";
 import { getProposalByFreelancer } from "@/lib/api/proposal";
-import Link from "next/link";
 
 /* ================= STATUS COLORS ================= */
 const getTaskStatusColor = (status) => {

@@ -4,7 +4,6 @@ import Link from "next/link";
 const LatestFeaturedTasks = async () => {
   const tasks = await getFeatureTask();
 
-  console.log(tasks,'nnnnnnnnnnnnnnn');
 
   return (
     <section className="py-16">
