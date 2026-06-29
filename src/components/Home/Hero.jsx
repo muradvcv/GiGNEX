@@ -10,7 +10,6 @@ import {
 } from "lucide-react";
 import { useSession } from "@/lib/auth-client";
 import { motion } from "motion/react";
-import PlatformStats from "./PlatformStats";
 
 export default function Hero() {
   const { data: session, isPending } = useSession();
@@ -166,7 +165,7 @@ export default function Hero() {
                       </Button>
                     </Link>
 
-                    <Link href="/dashboard/admin/manage-users">
+                    <Link href="/dashboard/admin/users">
                       <Button variant="bordered" size="lg">
                         Manage Users
                       </Button>
@@ -282,7 +281,7 @@ export default function Hero() {
               </div>
             </Card>
           </motion.div>
-        </div>   
+        </div>
       </div>
     </section>
   );
