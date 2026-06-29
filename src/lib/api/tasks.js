@@ -58,3 +58,27 @@ export async function getBrowseTaskDetails(id) {
     return null;
   }
 }
+
+
+// get latest 6 featured tasks
+export const getFeatureTask = async () => {
+  try {
+    const res = await fetch(
+      `${baseUrl}/api/tasks/featured`,
+      {
+        cache: "no-store",
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch featured tasks");
+    }
+
+    const result = await res.json();
+
+    return result.data;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
