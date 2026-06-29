@@ -52,6 +52,17 @@ https://github.com/muradvcv/GiGNEX-BACKEND
 
 ---
 
+---
+
+## 🔐 Admin Access
+
+| Field | Value |
+|------|------|
+| Email | admin@gmail.com |
+| Password | Murad123$$ |
+
+---
+
 # ✨ Key Features
 
 ## Authentication & Authorization
