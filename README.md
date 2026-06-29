@@ -193,13 +193,9 @@ https://github.com/muradvcv/GiGNEX-BACKEND
 ## Frontend
 
 * Next.js 15
-* React
-* TypeScript
 * Tailwind CSS
 * Hero UI
 * Framer Motion
-* React Hook Form
-* TanStack Query
 * Lucide React
 * React Icons
 
@@ -220,10 +216,8 @@ https://github.com/muradvcv/GiGNEX-BACKEND
 
 ```bash
 next
-react
 react-dom
 tailwindcss
-@tanstack/react-query
 react-hook-form
 framer-motion
 lucide-react
