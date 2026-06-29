@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 export default function DeliverableModal({ task, taskId }) {
   const [projectLink, setProjectLink] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const handleSubmit = async () => {
     if (!projectLink.trim()) {
       return Swal.fire({
@@ -32,7 +32,7 @@ export default function DeliverableModal({ task, taskId }) {
       setLoading(true);
 
       const res = await fetch(
-        `http://localhost:5000/api/tasks/${taskId}/deliverable`,
+        `${baseUrl}/api/tasks/${taskId}/deliverable`,
         {
           method: "PATCH",
           headers: {
