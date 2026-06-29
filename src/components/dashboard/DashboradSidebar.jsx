@@ -34,10 +34,10 @@ export default function DashboradSidebar() {
       { icon: Person, label: "Edit Profile", href: "/public/freelancers/editprofile" },
     ],
     admin: [
-      { icon: LayoutDashboard, label: "Overview", href: "/dashboard/messages" },
-      { icon: UsersRound, label: "User", href: "/dashboard/users" },
-      { icon: ListTodo, label: "Tasks", href: "/dashboard/tasks" },
-      { icon: CircleDollar, label: "Payments", href: "/dashboard/payments" },
+      { icon: LayoutDashboard, label: "Overview", href: "/dashboard/admin" },
+      { icon: UsersRound, label: "Users", href: "/dashboard/admin/users" },
+      { icon: ListTodo, label: "Tasks", href: "/dashboard/admin/tasks" },
+      { icon: CircleDollar, label: "Payments", href: "/dashboard/admin/payments" },
     ]
   };
 

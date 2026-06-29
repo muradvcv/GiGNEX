@@ -19,3 +19,23 @@ export const getAllSummary = async () => {
     return null;
   }
 };
+
+
+// get all user for admin
+
+export const getAllUser = async () => {
+  try {
+    const res = await fetch(`${baseUrl}/api/admin/users`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch users");
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
