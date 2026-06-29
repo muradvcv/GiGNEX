@@ -1,6 +1,7 @@
 "use client";
 import { useSession } from "@/lib/auth-client";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const DashProfile = () => {
@@ -22,7 +23,7 @@ const DashProfile = () => {
   const user = session?.user;
 
   return (
-    <div className="flex items-center gap-3 p-2 border rounded-xl bg-white shadow-sm mb-2">
+    <Link href={`/public/freelancers/${user.id}`} className="flex items-center gap-3 p-2 border rounded-xl bg-white shadow-sm mb-2">
 
       {/* Avatar */}
       <Image
@@ -51,7 +52,7 @@ const DashProfile = () => {
           {user?.email}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 

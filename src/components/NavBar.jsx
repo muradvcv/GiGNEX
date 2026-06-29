@@ -97,7 +97,7 @@ export default function NavBar() {
                 </Link>
 
                 {/* User Avatar */}
-                <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-200">
+                  <Link href={`/public/freelancers/${user.id}`} className="w-10 h-10 rounded-full overflow-hidden border border-gray-200">
                   {user?.image ? (
                     <Image
                       src={user.image}
@@ -112,7 +112,7 @@ export default function NavBar() {
                       {user?.name?.slice(0, 2).toUpperCase()}
                     </div>
                   )}
-                </div>
+                </Link>
 
                 {/* Logout */}
                 <button
