@@ -41,10 +41,10 @@ export default function DashboradSidebar() {
     ]
   };
 
-  // ✅ Role-wise নেভিগেশন (default 'client' যদি role না থাকে)
+  //  Role-wise নেভিগেশন (default 'client' যদি role না থাকে)
   const navItems = DashboardItem[user?.role || "client"] || DashboardItem.client;
 
-  // ✅ শুধু ড্রয়ার বন্ধ করুন, reload করবেন না
+  //  শুধু ড্রয়ার বন্ধ করুন, reload করবেন না
   const handleClose = () => {
     setOpen(false);
   };

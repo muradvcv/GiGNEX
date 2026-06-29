@@ -1,36 +1,340 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SkillSwap - Freelance Micro-Task Platform
 
-## Getting Started
+<p align="center">
+  <img src="./src/adminoverview.png" alt="SkillSwap Dashboard Overview" width="100%" />
+</p>
 
-First, run the development server:
+<h3 align="center">
+A Full Stack Freelance Marketplace Platform
+</h3>
+
+<p align="center">
+  <a href="https://gi-gnex.vercel.app/">
+    <img src="https://img.shields.io/badge/Live-Demo-success?style=for-the-badge" />
+  </a>
+  <a href="https://github.com/muradvcv/GiGNEX">
+    <img src="https://img.shields.io/badge/Client-Repository-blue?style=for-the-badge" />
+  </a>
+  <a href="https://github.com/muradvcv/GiGNEX-BACKEND">
+    <img src="https://img.shields.io/badge/Server-Repository-orange?style=for-the-badge" />
+  </a>
+</p>
+
+---
+
+# 🌟 Project Overview
+
+SkillSwap is a modern Freelance Micro-Task Marketplace where clients can post small tasks and freelancers can submit proposals, get hired, complete work, and receive payments securely.
+
+The platform supports three different user roles:
+
+* Client
+* Freelancer
+* Admin
+
+Clients can create and manage tasks, freelancers can apply and complete projects, and admins can monitor platform activities, users, tasks, and transactions.
+
+---
+
+# 🚀 Live Project
+
+### Live Website
+
+https://gi-gnex.vercel.app/
+
+### Client Repository
+
+https://github.com/muradvcv/GiGNEX
+
+### Server Repository
+
+https://github.com/muradvcv/GiGNEX-BACKEND
+
+---
+
+# ✨ Key Features
+
+## Authentication & Authorization
+
+* Better Auth Authentication
+* Email & Password Login
+* Google OAuth Login
+* JWT Authentication
+* HTTPOnly Cookie Security
+* Protected Routes
+* Role-Based Access Control
+* Persistent Login Sessions
+
+---
+
+## Client Features
+
+* Create New Tasks
+* Update Existing Tasks
+* Delete Tasks
+* Manage Posted Tasks
+* View Freelancer Proposals
+* Accept or Reject Proposals
+* Stripe Payment Integration
+* Track Project Status
+* Dashboard Statistics
+
+---
+
+## Freelancer Features
+
+* Browse Available Tasks
+* Search Tasks
+* Filter Tasks by Category
+* Submit Proposals
+* Track Proposal Status
+* Active Project Management
+* Deliver Work via URL Submission
+* Earnings Tracking
+* Public Freelancer Profile
+* Profile Editing
+
+---
+
+## Admin Features
+
+* User Management
+* Block / Unblock Users
+* Task Management
+* Transaction Monitoring
+* Revenue Tracking
+* Platform Statistics Dashboard
+
+---
+
+## Payment System
+
+* Stripe Checkout Integration
+* Secure Payment Verification
+* Payment Success Page
+* Transaction History
+* Revenue Tracking
+
+---
+
+## Advanced Features
+
+* Dynamic Featured Tasks
+* Dynamic Top Freelancers
+* Pagination System
+* Search Functionality
+* Category Filtering
+* Review & Rating System
+* Responsive Dashboard
+* Mobile Sidebar Navigation
+* Modern UI Animations
+* Custom 404 Page
+
+---
+
+# 🗂 Database Collections
+
+## Users
+
+* name
+* email
+* image
+* role
+* skills
+* bio
+* isBlocked
+* createdAt
+
+## Tasks
+
+* title
+* category
+* description
+* budget
+* deadline
+* client_email
+* status
+* deliverable_url
+* createdAt
+
+## Proposals
+
+* task_id
+* freelancer_email
+* proposed_budget
+* estimated_days
+* cover_note
+* status
+* submitted_at
+
+## Payments
+
+* client_email
+* freelancer_email
+* task_id
+* amount
+* transaction_id
+* payment_status
+* paid_at
+
+## Reviews
+
+* task_id
+* reviewer_email
+* reviewee_email
+* rating
+* comment
+* created_at
+
+---
+
+# 🛠 Technologies Used
+
+## Frontend
+
+* Next.js 15
+* React
+* TypeScript
+* Tailwind CSS
+* Hero UI
+* Framer Motion
+* React Hook Form
+* TanStack Query
+* Lucide React
+* React Icons
+
+## Backend
+
+* Node.js
+* Express.js
+* MongoDB
+* JWT
+* Better Auth
+* Stripe
+
+---
+
+# 📦 NPM Packages
+
+### Frontend
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+next
+react
+react-dom
+tailwindcss
+@tanstack/react-query
+react-hook-form
+framer-motion
+lucide-react
+react-icons
+axios
+sweetalert2
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Backend
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+express
+mongodb
+cors
+dotenv
+jsonwebtoken
+stripe
+better-auth
+cookie-parser
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+# 🔐 Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+### Frontend
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+BETTER_AUTH_URL=
+BETTER_AUTH_SECRET=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+NEXT_PUBLIC_BASE_URL=
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Backend
 
-## Deploy on Vercel
+```env
+PORT=
+MONGO_DB_URI=
+AUTH_DB_NAME=
+JWT_SECRET=
+STRIPE_SECRET_KEY=
+CLIENT_URL=
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# 📱 Responsive Design
+
+The application is fully responsive and optimized for:
+
+* Mobile Devices
+* Tablets
+* Laptops
+* Desktop Screens
+
+---
+
+# 🎯 Assignment Requirements Completed
+
+✅ Authentication System
+
+✅ Better Auth Integration
+
+✅ Google OAuth
+
+✅ Role-Based Dashboard
+
+✅ JWT Security
+
+✅ Stripe Payment
+
+✅ CRUD Operations
+
+✅ Search Functionality
+
+✅ Category Filtering
+
+✅ Server-Side Pagination
+
+✅ Protected Routes
+
+✅ Dynamic Home Page
+
+✅ Admin Dashboard
+
+✅ Freelancer Dashboard
+
+✅ Client Dashboard
+
+✅ MongoDB Database Design
+
+✅ Responsive Design
+
+✅ Custom Error Handling
+
+✅ Production Deployment
+
+---
+
+# 👨‍💻 Developer
+
+### Murad
+
+Full Stack Web Developer
+
+GitHub:
+https://github.com/muradvcv
+
+---
+
+© 2026 SkillSwap. All Rights Reserved.

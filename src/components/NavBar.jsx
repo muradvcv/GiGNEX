@@ -183,7 +183,7 @@ export default function NavBar() {
 
                   {/* Dashboard */}
                   <Link
-                    href="/dashboard/client"
+                    href={`/dashboard/${user.role}`}
                     onClick={() => setIsOpen(false)}
                     className="flex items-center gap-2 text-gray-600 hover:text-black transition"
                   >
