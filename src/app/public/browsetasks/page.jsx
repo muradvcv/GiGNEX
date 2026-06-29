@@ -20,18 +20,14 @@ const formatDate = (date) => {
 
 const getCategoryStyle = (category) => {
   const styles = {
-    "Web Development":
+    "Technology":
       "bg-blue-50 text-blue-600 border border-blue-100",
-    "Graphic Design":
+    "Design":
       "bg-purple-50 text-purple-600 border border-purple-100",
-    "Digital Marketing":
+    "Marketing":
       "bg-indigo-50 text-indigo-600 border border-indigo-100",
-    "Content Writing":
+    "Sales":
       "bg-fuchsia-50 text-fuchsia-600 border border-fuchsia-100",
-    "Video Editing":
-      "bg-rose-50 text-rose-600 border border-rose-100",
-    "Data Entry":
-      "bg-cyan-50 text-cyan-600 border border-cyan-100",
   };
 
   return (
@@ -41,16 +37,31 @@ const getCategoryStyle = (category) => {
 };
 
 const BrowseTasks = async ({ searchParams }) => {
-  // Next.js 15
   const params = await searchParams;
 
   const page = Number(params?.page) || 1;
   const search = params?.search || "";
+  const category = params?.category || "All";
 
   const data = await getBrowseTasks(page, search);
 
-  const tasks = data?.tasks || [];
+  const allTasks = data?.tasks || [];
   const totalPages = data?.totalPages || 1;
+
+  // Frontend Category Filter
+  const tasks =
+    category === "All"
+      ? allTasks
+      : allTasks.filter((task) => task.category === category);
+
+  const categories = [
+    "All",
+    "technology",
+    "design",
+    "marketing",
+    "sales",
+
+  ];
 
   const statusStyles = {
     open: "bg-emerald-50 text-emerald-700 border border-emerald-200",
@@ -61,20 +72,39 @@ const BrowseTasks = async ({ searchParams }) => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-gray-50 min-h-screen">
-      
+
       {/* Header */}
-      <div className="mb-10">
+      <div className="mb-8">
         <h1 className="text-4xl font-bold text-gray-900">
           Browse Available Tasks
         </h1>
 
         <p className="mt-2 text-gray-500">
-          Find the perfect skill-swapping opportunities and start
-          collaborating.
+          Find the perfect skill-swapping opportunities.
         </p>
       </div>
+
       <Search />
-      {/* Empty State */}
+
+      {/* Category Filter */}
+      <div className="flex flex-wrap gap-3 my-8">
+        {categories.map((item) => (
+          <Link
+            key={item}
+            href={`/public/browsetasks?page=1&search=${search}&category=${encodeURIComponent(
+              item
+            )}`}
+            className={`px-4 py-2 rounded-full border text-sm font-medium transition
+              ${category === item
+                ? "bg-cyan-600 text-white border-cyan-600"
+                : "bg-white hover:bg-cyan-50 border-gray-200"
+              }`}
+          >
+            {item}
+          </Link>
+        ))}
+      </div>
+
       {tasks.length === 0 && (
         <div className="bg-white rounded-2xl border py-20 text-center">
           <Briefcase
@@ -87,12 +117,11 @@ const BrowseTasks = async ({ searchParams }) => {
           </h2>
 
           <p className="text-gray-500 mt-2">
-            Please check back later.
+            No task available in this category.
           </p>
         </div>
       )}
 
-      {/* Tasks */}
       {tasks.length > 0 && (
         <>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -156,22 +185,20 @@ const BrowseTasks = async ({ searchParams }) => {
                     <div className="text-right">
                       <div className="flex items-center justify-end gap-1 text-xs text-gray-400">
                         <CalendarDays size={14} />
-
-                        <span>
-                          {formatDate(task.deadline)}
-                        </span>
+                        <span>{formatDate(task.deadline)}</span>
                       </div>
 
                       <div className="mt-2 flex items-center justify-end gap-1 text-cyan-600 opacity-0 group-hover:opacity-100 transition">
                         View
-
                         <ArrowRight
                           size={15}
                           className="group-hover:translate-x-1 transition"
                         />
                       </div>
                     </div>
+
                   </div>
+
                 </div>
               </Link>
             ))}
@@ -180,33 +207,48 @@ const BrowseTasks = async ({ searchParams }) => {
           {/* Pagination */}
           <div className="flex justify-center items-center gap-2 mt-12 flex-wrap">
 
-            {/* Previous */}
-            <Link className="shadow p-2 rounded-md border"
-              href={`/public/browsetasks?page=${page - 1}&search=${search}`}
-            >
-              ← Previous
-            </Link>
+            {page > 1 && (
+              <Link
+                className="shadow px-4 py-2 rounded-md border"
+                href={`/public/browsetasks?page=${page - 1
+                  }&search=${search}&category=${encodeURIComponent(
+                    category
+                  )}`}
+              >
+                ← Previous
+              </Link>
+            )}
 
-            {/* Page Numbers */}
             {Array.from({ length: totalPages }, (_, index) => {
               const pageNumber = index + 1;
 
               return (
-                <Link className="shadow px-1 rounded-md border"
+                <Link
                   key={pageNumber}
-                  href={`/public/browsetasks?page=${pageNumber}&search=${search}`}
+                  href={`/public/browsetasks?page=${pageNumber}&search=${search}&category=${encodeURIComponent(
+                    category
+                  )}`}
+                  className={`w-10 h-10 flex items-center justify-center rounded-md border ${page === pageNumber
+                      ? "bg-cyan-600 text-white"
+                      : "bg-white"
+                    }`}
                 >
                   {pageNumber}
                 </Link>
               );
             })}
 
-            {/* Next */}
-            <Link className="shadow p-2 rounded-md border"
-              href={`/public/browsetasks?page=${page + 1}&search=${search}`}
-            >
-              Next →
-            </Link>
+            {page < totalPages && (
+              <Link
+                className="shadow px-4 py-2 rounded-md border"
+                href={`/public/browsetasks?page=${page + 1
+                  }&search=${search}&category=${encodeURIComponent(
+                    category
+                  )}`}
+              >
+                Next →
+              </Link>
+            )}
 
           </div>
         </>
