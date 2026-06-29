@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 export default function DeliverableModal({ task, taskId }) {
   const [projectLink, setProjectLink] = useState("");
   const [loading, setLoading] = useState(false);
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const handleSubmit = async () => {
     if (!projectLink.trim()) {
       return Swal.fire({
@@ -42,6 +42,12 @@ export default function DeliverableModal({ task, taskId }) {
             deliverable_url: projectLink,
           }),
         }
+      );
+      console.log("BASE URL:", process.env.NEXT_PUBLIC_API_URL);
+      console.log("Task ID:", taskId);
+      console.log(
+        "Request URL:",
+        `${baseUrl}/api/tasks/${taskId}/deliverable`
       );
 
       const data = await res.json();
