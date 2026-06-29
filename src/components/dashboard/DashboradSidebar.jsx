@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { House, LayoutHeaderCells, Magnifier, ListCheck, Folder, CircleDollar, Person, CirclePlus, Archive, Bars } from "@gravity-ui/icons";
+import { House, LayoutHeaderCells, Magnifier, ListCheck, Folder, CircleDollar, Person, CirclePlus, Archive, Bars} from "@gravity-ui/icons";
 import { Button, Drawer } from "@heroui/react";
+import { LayoutDashboard, UsersRound,ListTodo} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import DashProfile from "./DashProfile";
@@ -33,9 +34,9 @@ export default function DashboradSidebar() {
       { icon: Person, label: "Edit Profile", href: "/public/freelancers/editprofile" },
     ],
     admin: [
-      { icon: CirclePlus, label: "Overview", href: "/dashboard/messages" },
-      { icon: CirclePlus, label: "User", href: "/dashboard/users" },
-      { icon: Archive, label: "Tasks", href: "/dashboard/tasks" },
+      { icon: LayoutDashboard, label: "Overview", href: "/dashboard/messages" },
+      { icon: UsersRound, label: "User", href: "/dashboard/users" },
+      { icon: ListTodo, label: "Tasks", href: "/dashboard/tasks" },
       { icon: CircleDollar, label: "Payments", href: "/dashboard/payments" },
     ]
   };
