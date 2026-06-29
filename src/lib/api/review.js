@@ -22,3 +22,23 @@ export const getReviewByFreelancerId = async (freelancerId) => {
     return [];
   }
 };
+
+
+// get top review freelancers
+
+export const getTopReviewFreelancer = async () => {
+  try {
+    const res = await fetch(`${baseUrl}/top-freelancers`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch top freelancers");
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};

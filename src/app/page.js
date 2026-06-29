@@ -1,4 +1,5 @@
 import AdminCharts from "@/components/dashboard/admin/AdminCharts";
+import GetTopFreelancer from "@/components/Home/GetTopFreelancer";
 import Hero from "@/components/Home/Hero";
 import How from "@/components/Home/How";
 import LatestFeaturedTasks from "@/components/Home/LatestFeaturedTasks";
@@ -15,6 +16,7 @@ export default async function Home() {
       <Hero />
       
       <div className="max-w-7xl mx-auto">
+        <GetTopFreelancer/>
         <LatestFeaturedTasks />
         <AdminCharts summary={summary} />
       </div>
