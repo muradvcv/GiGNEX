@@ -1,4 +1,4 @@
-# SkillSwap - Freelance Micro-Task Platform
+# GiGNEX - Freelance Micro-Task Platform
 
 <p align="center">
   <img src="./src/adminoverview.png" alt="SkillSwap Dashboard Overview" width="100%" />

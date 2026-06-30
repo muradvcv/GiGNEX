@@ -53,8 +53,8 @@ export default function NavBar() {
           />
 
           <span className="font-extrabold text-2xl tracking-tight">
-            <span className="text-[#06B6D4]">Skill</span>
-            <span className="text-[#7700ff]">Swap</span>
+            <span className="text-[#06B6D4]">GiG</span>
+            <span className="text-[#7700ff]">NEX</span>
           </span>
         </Link>
 
