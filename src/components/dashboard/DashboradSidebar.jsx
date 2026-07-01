@@ -116,7 +116,6 @@ export default function DashboradSidebar() {
               <nav className="flex flex-col gap-1">
                 {navItems.map((item) => {
                   const isActive = pathname === item.href;
-
                   return (
                     <Link
                       key={item.label}

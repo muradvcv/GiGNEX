@@ -24,7 +24,7 @@ A Full Stack Freelance Marketplace Platform
 
 # 🌟 Project Overview
 
-SkillSwap is a modern Freelance Micro-Task Marketplace where clients can post small tasks and freelancers can submit proposals, get hired, complete work, and receive payments securely.
+GiGNEX is a modern Freelance Micro-Task Marketplace where clients can post small tasks and freelancers can submit proposals, get hired, complete work, and receive payments securely.
 
 The platform supports three different user roles:
 
@@ -300,4 +300,4 @@ https://github.com/muradvcv
 
 ---
 
-© 2026 SkillSwap. All Rights Reserved.
+© 2026 GiGNEX. All Rights Reserved.

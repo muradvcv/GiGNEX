@@ -37,7 +37,6 @@ const AdminDashboard = async () => {
       sub: "Currently in progress",
     },
   ];
-
   return (
     <div className="p-6">
       <div className="mb-10">
