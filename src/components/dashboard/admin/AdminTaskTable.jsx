@@ -37,11 +37,11 @@ export default function AdminTaskTable({ tasks = [] }) {
   const statusColor = (status) => {
     switch (status?.toLowerCase()) {
       case "open":
-        return "bg-blue-100 text-blue-600";
+        return "bg-blue-200 text-blue-600";
       case "completed":
-        return "bg-green-100 text-green-600";
+        return "bg-green-200 text-green-600";
       case "in progress":
-        return "bg-orange-100 text-orange-600";
+        return "bg-orange-200 text-orange-600";
       default:
         return "bg-gray-100 text-gray-600";
     }
@@ -61,7 +61,7 @@ export default function AdminTaskTable({ tasks = [] }) {
       {/* Header */}
       <div className="mb-5">
         <h1 className="text-3xl font-bold">Task Management</h1>
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-400">
           {filteredTasks.length} total tasks
         </p>
       </div>
