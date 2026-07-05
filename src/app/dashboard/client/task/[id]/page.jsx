@@ -3,7 +3,6 @@ import {
   ArrowLeft,
   Calendar,
   CircleDollarSign,
-  Trash2,
 } from "lucide-react";
 import Image from "next/image";
 import { getTaskById } from "@/lib/api/tasks";
