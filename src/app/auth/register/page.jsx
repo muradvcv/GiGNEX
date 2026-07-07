@@ -79,6 +79,10 @@ const Register = () => {
             ? Number(data.hourlyRate || 0)
             : 0,
       });
+      if (result.token) {
+        toast.success("Account created successfully!");
+       await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/send-email?email=${data.email}&name=${data.name}`, {method: "POST",});
+      }
 
       if (result.error) {
         setError(result.error.message);
