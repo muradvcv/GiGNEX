@@ -124,7 +124,7 @@ export default function Footer() {
               aria-label="Instagram"
               className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-200 text-slate-700 hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:text-white transition-all duration-300 shadow-sm"
             >
-              <FaInstagram size={16} />
+              <FaInstagram size={15} />
             </a>
           </div>
         </div>
