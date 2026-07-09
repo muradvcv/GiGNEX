@@ -16,7 +16,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   const pathname = usePathname();
 
-  // Dashboard-এর জন্য ফুটার হাইড রাখা হয়েছে
+  // Dashboard
   if (pathname?.startsWith("/dashboard")) {
     return null;
   }
@@ -35,8 +35,8 @@ export default function Footer() {
               <Image
                 src="/logoR.png"
                 alt="GIGNEX Logo"
-                width={36}
-                height={36}
+                width={35}
+                height={35}
                 priority
                 className="object-contain"
               />
