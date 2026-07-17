@@ -1,12 +1,11 @@
 "use client";
-
 import React from "react";
 import { Link } from "@heroui/react";
 import {
-  FaInstagram,
-  FaFacebookF,
-  FaEnvelope,
-  FaLinkedinIn
+FaInstagram,
+FaFacebookF,
+FaEnvelope,
+FaLinkedinIn
 } from "react-icons/fa";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -20,7 +19,6 @@ export default function Footer() {
   if (pathname?.startsWith("/dashboard")) {
     return null;
   }
-
   return (
     <footer className="w-full bg-slate-50 border-t border-slate-200 text-slate-600 py-12 px-6 md:px-12 font-sans">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
@@ -30,8 +28,7 @@ export default function Footer() {
           <div>
             <Link
               href="/"
-              className="flex items-center gap-3 text-inherit no-underline hover:opacity-90 transition-opacity"
-            >
+              className="flex items-center gap-3 text-inherit no-underline hover:opacity-90 transition-opacity">
               <Image
                 src="/logoR.png"
                 alt="GIGNEX Logo"
