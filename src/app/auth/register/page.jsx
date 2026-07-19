@@ -68,7 +68,6 @@ const Register = () => {
           data.role === "freelancer"
             ? data.skills?.split(",").map((s) => s.trim())
             : [],
-
         bio:
           data.role === "freelancer"
             ? data.bio

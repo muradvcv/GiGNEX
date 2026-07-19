@@ -75,7 +75,6 @@ export default function Footer() {
             <li><Link href="#" className="text-slate-600 hover:text-[#06B6D4] transition-colors">Privacy Policy</Link></li>
           </ul>
         </div>
-
         {/* Contact & Social Component */}
         <div className="flex flex-col space-y-4">
           <h4 className="font-semibold text-slate-900 text-sm tracking-wider uppercase">Contact Us</h4>
@@ -97,7 +96,7 @@ export default function Footer() {
               <FaXTwitter size={15} />
             </a>
 
-            {/* Facebook */}
+          
             <a
               href="#"
               aria-label="Facebook"
