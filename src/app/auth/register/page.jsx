@@ -114,7 +114,6 @@ const Register = () => {
           {error}
         </p>
       )}
-
       {/* HEADER */}
       <div className="mb-8 text-center">
         <h1 className="text-3xl font-bold">Create Account</h1>
