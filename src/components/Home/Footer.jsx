@@ -87,7 +87,7 @@ export default function Footer() {
 
           {/* Official Social Icons */}
           <div className="flex items-center gap-3 pt-2">
-            {/* X / Twitter */}
+            {/*Twitter */}
             <a
               href="#"
               aria-label="Twitter"
@@ -95,7 +95,6 @@ export default function Footer() {
             >
               <FaXTwitter size={15} />
             </a>
-
           
             <a
               href="#"
