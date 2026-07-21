@@ -170,7 +170,6 @@ export default function NavBar() {
               </Link>
             ))}
           </div>
-
           {/* Mobile Auth */}
           <div className="flex flex-col gap-3 mt-6">
             {isPending ? (
@@ -180,7 +179,6 @@ export default function NavBar() {
             ) : user ? (
               <>
                 <div className="flex items-center justify-between bg-gray-100 rounded-xl px-4 py-3">
-
                   {/* Dashboard */}
                   <Link
                     href={`/dashboard/${user.role}`}
@@ -217,7 +215,7 @@ export default function NavBar() {
                     }}
                     className="text-gray-500 hover:text-red-500 transition"
                   >
-                    <LogOut size={18} />
+                    <LogOut size={19} />
                   </button>
                 </div>
               </>
