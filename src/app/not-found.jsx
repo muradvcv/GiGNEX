@@ -11,7 +11,6 @@ export default function NotFound() {
         <div className="flex justify-center mb-6">
           <AlertCircle size={48} className="text-gray-400" strokeWidth={1.5} />
         </div>
-
         {/* Error Code */}
         <div className="text-center mb-4">
           <p className="text-sm font-medium text-gray-500 tracking-wide mb-2">
@@ -24,7 +23,6 @@ export default function NotFound() {
         <h2 className="text-xl font-semibold text-gray-900 text-center mb-3">
           Page Not Found
         </h2>
-
         {/* Description */}
         <p className="text-gray-600 text-center text-sm leading-relaxed mb-8">
           The page you are looking for does not exist or has been moved. Let
