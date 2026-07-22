@@ -48,7 +48,7 @@ const BrowseTasks = async ({ searchParams }) => {
   const allTasks = data?.tasks || [];
   const totalPages = data?.totalPages || 1;
 
-  // Frontend Category Filter
+  // Frontend Category by Filter
   const tasks =
     category === "All"
       ? allTasks
@@ -62,7 +62,6 @@ const BrowseTasks = async ({ searchParams }) => {
     "sales",
 
   ];
-
   const statusStyles = {
     open: "bg-emerald-50 text-emerald-700 border border-emerald-200",
     "in-progress":
