@@ -5,7 +5,7 @@ export default function How() {
     {
       id: "1",
       title: "Post a Task",
-      description: "Describe what you need done in minutes.",
+      description: "Describe what you need done.",
       icon: FileText,
     },
     {
@@ -21,7 +21,6 @@ export default function How() {
       icon: UserRoundCheck,
     },
   ];
-
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4">
@@ -44,7 +43,6 @@ export default function How() {
                       <div className="w-14 h-14 rounded-xl bg-violet-100 flex items-center justify-center transition-all duration-300 group-hover:bg-violet-600">
                         <Icon className="w-7 h-7 text-violet-600 group-hover:text-white" />
                       </div>
-
                       <div>
                         <h3 className="font-semibold text-lg text-gray-900">
                           {step.id}. {step.title}
@@ -68,7 +66,6 @@ export default function How() {
           })}
         </div>
        
-      
       </div>
     </section>
   );
