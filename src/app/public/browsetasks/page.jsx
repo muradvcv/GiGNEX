@@ -48,7 +48,7 @@ const BrowseTasks = async ({ searchParams }) => {
   const allTasks = data?.tasks || [];
   const totalPages = data?.totalPages || 1;
 
-  // Frontend Category by Filter
+  //Category by Filter
   const tasks =
     category === "All"
       ? allTasks

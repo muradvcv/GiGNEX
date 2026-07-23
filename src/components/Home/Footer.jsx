@@ -85,7 +85,7 @@ export default function Footer() {
             <span>info@gignex.com</span>
           </div>
 
-          {/* Official Social Icons */}
+          {/* Official Icons */}
           <div className="flex items-center gap-3 pt-2">
             {/*Twitter */}
             <a
