@@ -63,7 +63,6 @@ const GetTopReview = async () => {
                     </span>
                   </div>
 
-                
                   <p className="text-sm text-gray-500 truncate mt-1">
                     {freelancer.freelancerEmail}
                   </p>
@@ -80,7 +79,7 @@ const GetTopReview = async () => {
               </Link>
             </div>
 
-            {/* Mobile Button */}
+          
             <Link
               href={`/public/freelancers/${freelancer.freelancerId}`}
               className="sm:hidden mt-4 flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-cyan-600 text-white text-sm font-medium hover:bg-cyan-700 transition"

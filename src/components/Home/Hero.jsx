@@ -45,7 +45,7 @@ export default function Hero() {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-14 items-center">
-          {/* LEFT */}
+  
           <motion.div
             initial={{ opacity: 0, x: -60 }}
             animate={{ opacity: 1, x: 0 }}
