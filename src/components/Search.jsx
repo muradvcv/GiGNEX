@@ -29,7 +29,7 @@ const Search = ({
             Search by Title
           </label>
 
-          <div className="flex h-12 overflow-hidden rounded-xl border border-gray-200 bg-white focus-within:border-cyan-500">
+          <div className="flex h-10 overflow-hidden rounded-xl border border-gray-200 bg-white focus-within:border-cyan-500">
             <input
               name="search"
               type="search"

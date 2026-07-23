@@ -23,7 +23,7 @@ export default function How() {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-18 bg-white">
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-gray-900 mb-12">
           How It Works
