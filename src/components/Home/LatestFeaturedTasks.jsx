@@ -22,7 +22,6 @@ const LatestFeaturedTasks = async () => {
               key={task._id}
               className="group relative overflow-hidden rounded-3xl border border-primary/10 bg-base-100 p-6 shadow-md hover:-translate-y-2 transition-all duration-300"
             >
-              {/* Cyan Glow */}
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-blue-500/10 opacity-0 group-hover:opacity-100 transition duration-500" />
 
               <div className="relative z-10">
@@ -49,13 +48,11 @@ const LatestFeaturedTasks = async () => {
                     <span className="font-semibold">Client:</span>{" "}
                     {task.clientName}
                   </p>
-
                   <p>
                     <span className="font-semibold">Deadline:</span>{" "}
                     {task.deadline}
                   </p>
                 </div>
-
                 <Link
                   href={`/public/browsetasks/${task._id}`}
                   className="inline-flex items-center gap-2 rounded-xl border border-cyan-500 px-4 py-2 text-sm font-semibold text-cyan-600 transition-all duration-300 hover:bg-cyan-500 hover:text-white hover:shadow-md"

@@ -8,12 +8,11 @@ const GetTopReview = async () => {
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-14">
-      {/* Header */}
+      
       <div className="text-center mb-10">
         <span className="inline-block px-4 py-1 rounded-full bg-cyan-100 text-cyan-700 text-sm font-medium">
           Top Freelancers
         </span>
-
         <h2 className="text-3xl md:text-4xl font-bold mt-4">
           🏆 Top Rated Freelancers
         </h2>
@@ -39,7 +38,7 @@ const GetTopReview = async () => {
                   {freelancer.freelancerName?.charAt(0).toUpperCase()}
                 </div>
 
-                {/* Info */}
+                {/* Inf */}
                 <div className="flex-1 min-w-0">
                   {/* Name + Rating */}
                   <div className="flex flex-wrap items-center gap-3">
@@ -64,7 +63,7 @@ const GetTopReview = async () => {
                     </span>
                   </div>
 
-                  {/* Email */}
+                
                   <p className="text-sm text-gray-500 truncate mt-1">
                     {freelancer.freelancerEmail}
                   </p>
